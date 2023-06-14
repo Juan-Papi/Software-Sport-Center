@@ -43,7 +43,11 @@
                                 <label class="form-label">Marca</label>
                                 <select name="tipo_id" id="" class="form-control border border-2 p-2"
                                     wire:model="marca_id">
+<<<<<<< HEAD
                                     <option value="">Seleccionar Marca</option>
+=======
+                                    <option value="">Selecione la marca</option>
+>>>>>>> 488c9432117bcec6c7b45c0c8f52842905a6781b
                                     @foreach ($marcas as $marca)
                                         <option value="{{ $marca->id }}">{{ $marca->nombre }}</option>
                                     @endforeach
@@ -52,11 +56,19 @@
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 488c9432117bcec6c7b45c0c8f52842905a6781b
                             <div class="mb-3 col-md-6">
                                 <label class="form-label">Categoria</label>
                                 <select name="tipo_id" id="" class="form-control border border-2 p-2"
                                     wire:model="categoria_id">
+<<<<<<< HEAD
                                     <option value="">Seleccionar Categoria</option>
+=======
+                                    <option value="">Selecionar categoria</option>
+>>>>>>> 488c9432117bcec6c7b45c0c8f52842905a6781b
                                     @foreach ($categorias as $categoria)
                                         <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
                                     @endforeach
@@ -65,6 +77,7 @@
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
+<<<<<<< HEAD
                             <div class="mb-3 col-md-6">
 
                                 <label class="form-label">Precio</label>
@@ -74,12 +87,28 @@
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
+=======
+
+                            <div class="mb-3 col-md-12">
+                                <label class="form-label form-label-lg">Stock</label>
+                                <input wire:model="stock" name="stock" type="number" class="form-control form-control-lg border border-2 p-2">
+                                @error('stock')
+                                    <p class='text-danger inputerror'>{{ $message }} </p>
+                                @enderror
+                            </div>
+                            
+>>>>>>> 488c9432117bcec6c7b45c0c8f52842905a6781b
 
                             <div class="mb-3 col-md-12">
 
                                 <label for="floatingTextarea2">Descripcion</label>
+<<<<<<< HEAD
                                 <textarea wire:model="descripcion" class="form-control border border-2 p-2" placeholder="Escribe aqui todo acerca del producto ....."
                                     id="floatingTextarea2" rows="4" cols="50"></textarea>
+=======
+                                <textarea wire:model="descripcion" class="form-control border border-2 p-2"
+                                    placeholder="Escriba aqui todo acerca del producto .... " id="floatingTextarea2" rows="4" cols="50"></textarea>
+>>>>>>> 488c9432117bcec6c7b45c0c8f52842905a6781b
                                 @error('descripcion')
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror

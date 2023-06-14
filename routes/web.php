@@ -152,11 +152,5 @@ Route::group(['middleware' => 'auth'], function () {
      //Para las nota de compras
      Route::get('/nota_compra', NotaCompraComponent::class)->name('nota_compra.index');
      Route::get('/nota_compra/registrar', RegistrarNotaCompraComponent::class)->name('nota_compra.registrar');
-     Route::get('/nota_compra/editar/{nota_compra_id}', EditarNotaCompraComponent::class)->name('nota_compra.editar');
-
-     //! Para las Transacciones
-     Route::get('/transaccion', TransaccionComponent::class)->name('transaccion');
-     Route::get('/transaccion/registrar', RegistrarTransaccionComponet::class)->name('transaccion.registrar');
-     Route::get('/transaccion/editar/{transaccion_id}', EditarTransaccionComponet::class)->name('Transaccion.editar');
-
+     Route::get('/nota_compra/editar/{compra_id}', EditarNotaCompraComponent::class)->name('nota_compra.editar');
 });
