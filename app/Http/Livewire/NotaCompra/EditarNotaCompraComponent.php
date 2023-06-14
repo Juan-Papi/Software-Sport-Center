@@ -102,15 +102,9 @@ class EditarNotaCompraComponent extends Component
                 $productosCantidad[$productoId] = ['cantidad' => $cantidad, 'precio_unitario' => $precioUnitario];
             }
         }
-<<<<<<< HEAD
-
-        $nota_compra->productos()->sync($productosCantidad);
-        return redirect(route('nota_compra.index'))->with('status', '¡COMPRA actualizada exitosamente!');
-=======
         $nota_compra->productos()->sync($productosCantidad);     
         return redirect(route('nota_compra.index'))->with('status', 'Datos actualizados!');
     
->>>>>>> c37a894e815820a5a9650208ebe3eb983a0240f1
     }
 
     public function goBack()

@@ -27,7 +27,8 @@ class Login extends Component
 
     public function mount()
     {
-
+        $attributes = $this->validate();
+        
       if (! auth()->attempt($attributes , $this->rememberMe)) {
           throw ValidationException::withMessages([
               'email' => 'Your provided credentials could not be verified.'
