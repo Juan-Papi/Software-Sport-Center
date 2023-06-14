@@ -10,44 +10,38 @@ use Livewire\Component;
 class RegistrarProductoComponent extends Component
 {
     
-    public $descripcion, $stock, $marca_id, $categoria_id;
-
-    protected $rules = [
-        'descripcion' => 'required|max:255',
-        'stock' => 'required|integer',
-        'marca_id' => 'required|exists:marcas,id',
-        'categoria_id' => 'required|exists:categorias,id',
-    ];
-
-    public function render()
-    {
-        $marcas = Marca::all();
-        $categorias = Categoria::all();
-
-        return view('livewire.producto.registrar-producto-component', [
-            'marcas' => $marcas,
-            'categorias' => $categorias,
-        ]);
-    }
+    public $descripcion;
+    public $precio;
+    public $marca_id;
+    public $categoria_id;
 
     public function storeProducto()
     {
-        $this->validate();
-
+        $this->validate([
+            'descripcion' => 'required',
+            'precio' => 'required',
+            'marca_id' => 'required',
+            'categoria_id' => 'required',
+        ]);
         $producto = new Producto();
         $producto->descripcion = $this->descripcion;
-        $producto->stock = $this->stock;
+        $producto->precio = $this->precio;
         $producto->marca_id = $this->marca_id;
         $producto->categoria_id = $this->categoria_id;
         $producto->save();
-        return redirect(route('producto.index'))->with('status', 'Producto registrado!');
-      //  session()->flash('status', 'Producto registrado exitosamente!');
-        
-      //  $this->reset(['descripcion', 'stock', 'marca_id', 'categoria_id']);
+       // session()->flash('status', 'Nuevo SERVICIO registrado!');
+       return redirect(route('producto.index'))->with('status', 'Nuevo PRODUCTO registrado!');
     }
-
+    //función para retroceder
     public function goBack()
     {
-      return redirect(route('producto.index'));
+        // Lógica adicional si es necesario
+        $this->redirect(route('producto.index'));
+    }
+    public function render()
+    {   
+        $marcas = Marca::all();
+        $categorias = Categoria::all();
+        return view('livewire.producto.registrar-producto-component', compact('marcas','categorias'));
     }
 }

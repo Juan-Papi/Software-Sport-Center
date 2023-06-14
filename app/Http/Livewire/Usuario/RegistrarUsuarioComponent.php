@@ -59,7 +59,7 @@ class RegistrarUsuarioComponent extends Component
 
   public function render()
   {
-    $personales=Personal::orderBy('nombre','ASC')->get();
-    return view('livewire.usuario.registrar-usuario-component',['personales'=>$personales]);
+    $personales = Personal::orderBy('nombre', 'ASC')->get();
+    return view('livewire.usuario.registrar-usuario-component', ['personales' => $personales]);
   }
 }

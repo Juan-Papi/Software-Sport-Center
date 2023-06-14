@@ -57,11 +57,13 @@ class User extends Authenticatable
   {
     return $this->belongsTo(Personal::class, 'personal_id');
   }
+
+  // TODO: Implementacion de la relacion con la tabla Transacion
   //relacion de uno a muchos 
-  public function transaccions(){
+  public function transaccion(){
     return $this->hasMany(Transaccion::class);
   }
-   //relacion de uno a muchos 
+   //relacion de uno a muchos
    public function notasCompra(){
     return $this->hasMany(NotaCompra::class);
   }

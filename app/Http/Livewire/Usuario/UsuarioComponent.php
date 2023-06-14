@@ -19,6 +19,7 @@ class UsuarioComponent extends Component
         $user->delete();
         session()->flash('message','Usuario elimidado exitosamente!');
     }
+    
     public function render()
     {
         $users = User::orderBy('name', 'ASC')->paginate(5);

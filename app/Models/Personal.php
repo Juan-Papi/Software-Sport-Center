@@ -19,6 +19,6 @@ class Personal extends Model
   //relacion de  uno a uno con personal y user
   public function user()
   {
-    return $this->belongsTo(User::class, 'user_id');
+    return $this->hasOne(User::class, 'user_id');
   }
 }

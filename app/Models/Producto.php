@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Producto extends Model
 {
     use HasFactory;
-    protected $table = 'productos';
+    
     //Asignacion masiva para todos los campos excepto los de guarded
     protected $guarded =['id','created_at','updated_at'];
 
@@ -18,15 +18,14 @@ class Producto extends Model
         return $this->belongsTo(Marca::class);
     }
     
-    //Relacion uno a muchos inversa
+    //Relacion uno a muchos inversa entre Producto y  categoria
     public function categoria(){
         return $this->belongsTo(Categoria::class);
     }
-    //relacion de uno a muchos
+
+    //Relacion de muchos a muchos
     public function notasCompra()
     {
-        return $this->belongsToMany(NotaCompra::class, 'nota_compra_producto')
-            ->withPivot('cantidad', 'precio_unitario')
-            ->withTimestamps();
+        return $this->belongsToMany(NotaCompra::class, 'nota_compra_producto')->withPivot('cantidad');
     }
 }

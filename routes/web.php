@@ -63,7 +63,10 @@ use App\Http\Livewire\Producto\EditarProductoComponent;
 use App\Http\Livewire\NotaCompra\NotaCompraComponent;
 use App\Http\Livewire\NotaCompra\RegistrarNotaCompraComponent;
 use App\Http\Livewire\NotaCompra\EditarNotaCompraComponent;
-
+use App\Http\Livewire\Transaccion\EditarTransaccionComponet;
+//para las transacciones
+use App\Http\Livewire\Transaccion\RegistrarTransaccionComponet;
+use App\Http\Livewire\Transaccion\TransaccionComponent;
 //aparte
 use GuzzleHttp\Middleware;
 
@@ -150,4 +153,10 @@ Route::group(['middleware' => 'auth'], function () {
      Route::get('/nota_compra', NotaCompraComponent::class)->name('nota_compra.index');
      Route::get('/nota_compra/registrar', RegistrarNotaCompraComponent::class)->name('nota_compra.registrar');
      Route::get('/nota_compra/editar/{nota_compra_id}', EditarNotaCompraComponent::class)->name('nota_compra.editar');
+
+     //! Para las Transacciones
+     Route::get('/transaccion', TransaccionComponent::class)->name('transaccion');
+     Route::get('/transaccion/registrar', RegistrarTransaccionComponet::class)->name('transaccion.registrar');
+     Route::get('/transaccion/editar/{transaccion_id}', EditarTransaccionComponet::class)->name('Transaccion.editar');
+
 });
