@@ -70,6 +70,7 @@
                     <ul class="nav">
                         <li class="nav-item"><a class="nav-link" href="{{ route('perosnal.index') }}">Personal</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('usuario') }}">Usuario</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('rol.index') }}">Roles</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('bitacora.index') }}">Bitacora</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Something else here</a></li>
                     </ul>

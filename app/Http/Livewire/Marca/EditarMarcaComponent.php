@@ -16,6 +16,7 @@ class EditarMarcaComponent extends Component
         $this->marca_id = $marca_id;
         $this->nombre = $marca->nombre;
     }
+    
     public function updated($fields)
     {
         $this->validateOnly($fields, [

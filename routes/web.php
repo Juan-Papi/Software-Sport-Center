@@ -67,7 +67,9 @@ use App\Http\Livewire\Producto\EditarProductoComponent;
 use App\Http\Livewire\NotaCompra\NotaCompraComponent;
 use App\Http\Livewire\NotaCompra\RegistrarNotaCompraComponent;
 use App\Http\Livewire\NotaCompra\EditarNotaCompraComponent;
-
+use App\Http\Livewire\Role\EditarRoleComponent;
+use App\Http\Livewire\Role\RegistrarRoleComponent;
+use App\Http\Livewire\Role\RoleComponent;
 //aparte
 use GuzzleHttp\Middleware;
 
@@ -158,4 +160,9 @@ Route::group(['middleware' => 'auth'], function () {
      // Bitacora
      Route::get('/bitacora', Bitacora::class)->name('bitacora.index');
     
+     //Para los Roles
+     Route::get('/role', RoleComponent::class)->name('rol.index');
+     Route::get('/role/registrar', RegistrarRoleComponent::class)->name('rol.registrar');
+     Route::get('/role/editar/{rol_id}', EditarRoleComponent::class)->name('rol.editar');
+
     });
