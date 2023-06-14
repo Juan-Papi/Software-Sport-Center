@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Marca;
 
+use App\Models\Bitacora;
 use App\Models\Marca;
 use Livewire\Component;
 
@@ -19,6 +20,7 @@ class RegistrarMarcaComponent extends Component
         $marca = new Marca();
         $marca->nombre = $this->nombre;
         $marca->save();
+        Bitacora::Bitacora('C', 'Marca', $marca->id);   
         return redirect(route('marca.index'))->with('status', 'Nueva MARCA registrada!');
         //session()->flash('status', 'Nuevo tipo registrado!');
     }

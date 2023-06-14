@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Usuario;
 
+use App\Models\Bitacora;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -17,8 +18,10 @@ class UsuarioComponent extends Component
     {
         $user = User::find($user_id);
         $user->delete();
+        Bitacora::Bitacora('D', 'Usuario', $user->id);
         session()->flash('message','Usuario elimidado exitosamente!');
     }
+
     public function render()
     {
         $users = User::orderBy('name', 'ASC')->paginate(5);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Categoria;
 
+use App\Models\Bitacora;
 use App\Models\Categoria;
 use Livewire\Component;
 
@@ -23,6 +24,7 @@ class EditarCategoriaComponent extends Component
             'nombre' => 'required',
         ]);
     }
+    
     public function updateCategoria()
     {
         $this->validate([
@@ -31,6 +33,7 @@ class EditarCategoriaComponent extends Component
         $categoria= Categoria::find($this->categoria_id);
         $categoria->nombre = $this->nombre;
         $categoria->save();
+        Bitacora::Bitacora('C', 'Categoria', $categoria->id);
         //session()->flash('status', 'Datos actualizados!');
         return redirect(route('categoria.index'))->with('status', 'Datos actualizados!');
     }

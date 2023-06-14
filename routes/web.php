@@ -11,6 +11,10 @@ use App\Http\Livewire\ExampleLaravel\UserManagement;
 use App\Http\Livewire\ExampleLaravel\UserProfile;
 
 use App\Http\Livewire\Notifications;
+
+//Para Bitacora
+use App\Http\Livewire\Bitacora;
+
 //Para el personal
 use App\Http\Livewire\Personal\EditarPersonalComponent;
 use App\Http\Livewire\Personal\PersonalComponent;
@@ -149,5 +153,9 @@ Route::group(['middleware' => 'auth'], function () {
      //Para las nota de compras
      Route::get('/nota_compra', NotaCompraComponent::class)->name('nota_compra.index');
      Route::get('/nota_compra/registrar', RegistrarNotaCompraComponent::class)->name('nota_compra.registrar');
-     Route::get('/nota_compra/editar/{compra_id}', EditarNotaCompraComponent::class)->name('nota_compra.editar');
-});
+     Route::get('/nota_compra/editar/{nota_compra_id}', EditarNotaCompraComponent::class)->name('nota_compra.editar');
+
+     // Bitacora
+     Route::get('/bitacora', Bitacora::class)->name('bitacora.index');
+    
+    });

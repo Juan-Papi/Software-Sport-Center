@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Proveedor;
 
+use App\Models\Bitacora;
 use App\Models\proveedor;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -57,6 +58,7 @@ class RegistroProveedorComponent extends Component
     $proveedor->location = $this->location;
     $proveedor->tipo_proveedor = $this->tipo_proveedor;
     $proveedor->save();
+    Bitacora::Bitacora('C', 'Proveedor', $proveedor->id);
     return redirect(route('proveedor.index'))->with('status', 'Nuevo PROVEEDPR registrado!');
     //session()->flash('message', 'Nuevo Personal registrado!');
     }
