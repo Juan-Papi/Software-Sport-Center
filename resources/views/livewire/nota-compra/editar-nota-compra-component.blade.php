@@ -9,7 +9,7 @@
                 <div class="card-header pb-0 p-3">
                     <div class="row">
                         <div class="col-md-8 d-flex align-items-center">
-                            <h6 class="mb-3">NOTA DE COMPRA</h6>
+                            <h6 class="mb-3">EDITAR NOTA DE COMPRA</h6>
                         </div>
                     </div>
                 </div>
@@ -46,15 +46,19 @@
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
-                            <div class="mb-3 col-md-6">
+                            <!-- ... el resto del formulario ... -->
 
+                            <div class="mb-3 col-md-6">
                                 <label class="form-label">Monto Total</label>
                                 <input wire:model="total" name="precio" type="text"
-                                    class="form-control border border-2 p-2">
+                                    class="form-control border border-2 p-2" readonly>
                                 @error('total')
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
+
+                            <!-- ... el resto del formulario ... -->
+
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
@@ -79,21 +83,17 @@
                                 </div>
                             </div>
 
-                            <div>
+                            <div class="mb-3">
                                 <ul class="list-group">
                                     @foreach ($productos as $producto)
                                         <li class="list-group-item"
                                             style="display: flex; justify-content: space-between; align-items: center;">
                                             <div class="form-check">
-                                                {{-- este input de checkbox fue clave --}}
                                                 <input class="form-check-input" type="checkbox"
-                                                    value="{{ $producto->id }}" id="producto_{{ $producto->id }}"
+                                                    value="{{ $producto->id }}" id="servicio_{{ $producto->id }}"
                                                     wire:model="selectedProductos.{{ $producto->id }}">
-
                                                 <label class="form-check-label"
                                                     for="producto_{{ $producto->id }}">{{ $producto->descripcion }}</label>
-                                                <label class="form-check-label" for="precio_{{ $producto->id }}">
-                                                    -----> Precio: BS.{{ $producto->precio }}</label>
                                             </div>
                                             <div style="display: flex; align-items: center;">
                                                 <label for="cantidad_{{ $producto->id }}"
@@ -101,10 +101,15 @@
                                                 <input type="number" id="cantidad_{{ $producto->id }}"
                                                     wire:model="cantidad.{{ $producto->id }}"
                                                     class="form-control border border-2 p-2">
+                                                <label for="precio_{{ $producto->id }}"
+                                                    style="margin-left: 5px; margin-right: 5px;">Precio
+                                                    unitario:</label>
+                                                <input type="number" id="precio_{{ $producto->id }}"
+                                                    wire:model="precioUnitario.{{ $producto->id }}"
+                                                    class="form-control border border-2 p-2">
                                             </div>
                                         </li>
                                     @endforeach
-
                                 </ul>
                                 @error('selectedProductos')
                                     <div class="text-danger">{{ $message }}</div>
@@ -112,13 +117,17 @@
                                 @error('cantidad')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
+                                @error('precioUnitario')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
+
 
 
                         </div>
 
-                        <button type="button" wire:click="goBack()" class="btn bg-gradient-dark">Cancelar</button>
-                        <button type="submit" class="btn bg-gradient-dark">Guardar</button>
+                        <button type="button" wire:click="goBack()" class="btn bg-gradient-dark">Volver</button>
+                        <button type="submit" class="btn bg-gradient-dark">Actualizar</button>
                     </form>
                 </div>
             </div>

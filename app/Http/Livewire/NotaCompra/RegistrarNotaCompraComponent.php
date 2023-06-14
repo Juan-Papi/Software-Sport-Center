@@ -25,9 +25,12 @@ class RegistrarNotaCompraComponent extends Component
         $this->total = 0; // reset the total
         foreach ($this->selectedProductos as $productoId => $selected) {
             if ($selected && isset($this->cantidad[$productoId]) && isset($this->precioUnitario[$productoId])) {
-                $this->total += $this->cantidad[$productoId] * $this->precioUnitario[$productoId];
+                $cantidad = is_numeric($this->cantidad[$productoId]) ? $this->cantidad[$productoId] : 0;
+                $precioUnitario = is_numeric($this->precioUnitario[$productoId]) ? $this->precioUnitario[$productoId] : 0;
+                $this->total += $cantidad * $precioUnitario;
             }
         }
+
 
         $this->validateOnly($fields, [
             'fecha_hora' => 'required',
@@ -38,22 +41,30 @@ class RegistrarNotaCompraComponent extends Component
             'precioUnitario' => 'required',
         ]);
     }
+    //En esta función, estás recorriendo todos los productos y comprobando si el producto no está seleccionado. Si no está seleccionado, eliminas su cantidad y su precio unitario.(para usar en storeCompra)
+    public function cleanUnselectedProducts()
+    {
+        foreach ($this->selectedProductos as $productoId => $selected) {
+            if (!$selected) {
+                unset($this->cantidad[$productoId]);
+                unset($this->precioUnitario[$productoId]);
+            }
+        }
+    }
+
     public function storeCompra()
     {
-        foreach ($this->cantidad as $productoId => $cantidad) {
-            if (!$this->selectedProductos[$productoId]) {
-                session()->flash('message', 'Debe seleccionar un producto para agregar una cantidad');
-                return;
-            }
+        // Limpiar productos no seleccionados
+        $this->cleanUnselectedProducts();
+
+        // Comprobando que al menos un producto está seleccionado
+        $productosSeleccionados = array_filter($this->selectedProductos);
+        if (count($productosSeleccionados) == 0) {
+            session()->flash('message', 'Por favor, seleccione al menos un producto.');
+            return;
         }
 
-        foreach ($this->precioUnitario as $productoId => $precio) {
-            if (!$this->selectedProductos[$productoId]) {
-                session()->flash('message', 'Debe seleccionar un producto para agregar un precio');
-                return;
-            }
-        }
-
+        // Reglas de validación
         $this->validate([
             'fecha_hora' => 'required',
             'total' => 'required',
@@ -72,7 +83,7 @@ class RegistrarNotaCompraComponent extends Component
 
         $productosCantidad = [];
         foreach ($this->selectedProductos as $productoId => $selected) {
-            if ($selected) {
+            if ($selected && isset($this->cantidad[$productoId]) && isset($this->precioUnitario[$productoId])) {
                 $cantidad = $this->cantidad[$productoId];
                 $precioUnitario = $this->precioUnitario[$productoId]; // Obtenemos el precio unitario
                 $productosCantidad[$productoId] = ['cantidad' => $cantidad, 'precio_unitario' => $precioUnitario]; // Agregamos el precio unitario
@@ -82,6 +93,7 @@ class RegistrarNotaCompraComponent extends Component
         $nota_compra->productos()->sync($productosCantidad);
         return redirect(route('nota_compra.index'))->with('status', 'Nueva COMPRA registrada!');
     }
+
 
     //función para retroceder
     public function goBack()
