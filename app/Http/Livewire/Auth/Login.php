@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Auth;
 
+use App\Models\Bitacora;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
@@ -27,21 +28,14 @@ class Login extends Component
     public function mount()
     {
 
-        $this->fill(['email' => 'admin@material.com', 'password' => 'secret']);
-    }
-
-    public function store()
-    {
-        $attributes = $this->validate();
-
-        if (!auth()->attempt($attributes, $this->rememberMe)) {
-            throw ValidationException::withMessages([
-                'email' => 'Your provided credentials could not be verified.'
-            ]);
-        }
-
-        session()->regenerate();
-
-        return redirect('/dashboard');
-    }
+      if (! auth()->attempt($attributes , $this->rememberMe)) {
+          throw ValidationException::withMessages([
+              'email' => 'Your provided credentials could not be verified.'
+          ]);
+      }
+      $user = auth()->user();
+      Bitacora::Bitacora('I', 'Inicio Sesion', $user->id);
+      session()->regenerate();
+      return redirect('/dashboard');
+  }
 }

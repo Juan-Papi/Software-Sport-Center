@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Producto;
 
+use App\Models\Bitacora;
 use App\Models\Categoria;
 use App\Models\Marca;
 use Livewire\Component;
@@ -49,6 +50,7 @@ class EditarProductoComponent extends Component
         $producto->marca_id = $this->marca_id;
         $producto->categoria_id = $this->categoria_id;
         $producto->save();
+        Bitacora::Bitacora('U', 'Producto', $producto->id);   
         return redirect(route('producto.index'))->with('status', 'Datos actualizados!');
         //session()->flash('status', 'Datos actualizados!');
     }

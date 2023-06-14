@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Usuario;
 
+use App\Models\Bitacora;
 use App\Models\Personal;
 use App\Models\User;
 use Livewire\Component;
@@ -59,7 +60,7 @@ class EditarUsuarioComponent extends Component
       $user->about = $this->about;
       $user->password = $this->password;
       $user->personal_id = $this->personal_id;
-  
+      Bitacora::Bitacora('U', 'Usuario', $user->id);
       $user->save();
       session()->flash('message', 'Actualizacion exitosa!');
     }

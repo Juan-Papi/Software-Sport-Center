@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Personal;
 
+use App\Models\Bitacora;
 use App\Models\Personal;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -16,6 +17,7 @@ class PersonalComponent extends Component
   {
     $personal = Personal::find($personal_id);
     $personal->delete();
+    Bitacora::Bitacora('D', 'Personal', $personal->id);
     $this->deletedPersonalId = $personal_id;
    /* session()->flash('message', 'Registro eliminado exitosamente!');*/
   }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\TpServicio;
 
+use App\Models\Bitacora;
 use App\Models\TipoServicio;
 use Livewire\Component;
 use  Livewire\WithPagination;
@@ -35,6 +36,7 @@ class EditarComponent extends Component
         $tipoServicio = TipoServicio::find($this->tservicio_id);
         $tipoServicio->nombre = $this->nombre;
         $tipoServicio->save();
+        Bitacora::Bitacora('U', 'Tipo Servicio', $tipoServicio->id);   
         session()->flash('status', 'Datos actualizados!');
     }
     

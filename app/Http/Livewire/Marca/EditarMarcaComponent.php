@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Marca;
 
+use App\Models\Bitacora;
 use Livewire\Component;
 use App\Models\Marca;
 class EditarMarcaComponent extends Component
@@ -29,6 +30,7 @@ class EditarMarcaComponent extends Component
         $marca= Marca::find($this->marca_id);
         $marca->nombre = $this->nombre;
         $marca->save();
+        Bitacora::Bitacora('U', 'Marca', $marca->id);
         //session()->flash('status', 'Datos actualizados!');
         return redirect(route('marca.index'))->with('status', 'Datos actualizados!');
     }

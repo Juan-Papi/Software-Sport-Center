@@ -2,7 +2,8 @@
 
 namespace App\Http\Livewire\Proveedor;
 
-use App\Models\Proveedor;
+use App\Models\Bitacora;
+use App\Models\proveedor;
 use Livewire\Component;
 
 class ProveedorComponent extends Component
@@ -11,6 +12,7 @@ class ProveedorComponent extends Component
     {
       $personal = Proveedor::find($personal_id);
       $personal->delete();
+      Bitacora::Bitacora('D', 'Proveedor', $personal->id);
       session()->flash('message','Registro elimidado exitosamente!');
     }
     public function render()

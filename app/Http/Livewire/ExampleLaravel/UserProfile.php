@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\ExampleLaravel;
 
+use App\Models\Bitacora;
 use App\Models\User;
 use Livewire\Component;
 
@@ -42,6 +43,7 @@ class UserProfile extends Component
       return back()->with('demo', "You are in a demo version, you can't change the admin email.");
     };
     $this->user->save();
+    Bitacora::Bitacora('U', 'Perfil', $this->user->id);
     return back()->withStatus('Profile successfully updated.');
   }
 
