@@ -76,9 +76,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MembresiaSeeder::class);
         $this->call(TipoServicioSeeder::class);
         $this->call(ServicioSeeder::class);
-        $this->call(ProveedorSeeder::class);
-
-       
+        $this->call(ProveedorSeeder::class);       
         
     }
 }
