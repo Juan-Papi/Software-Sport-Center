@@ -38,10 +38,7 @@ class Login extends Component
               'email' => 'Your provided credentials could not be verified.'
           ]);
       }
-
       session()->regenerate();
-
       return redirect('/dashboard');
-
   }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Membresia;
 
+use App\Models\Bitacora;
 use Livewire\Component;
 use App\Models\Membresia;
 use App\Models\Servicio;
@@ -66,9 +67,8 @@ class EditarMembresiaComponent extends Component
         $membresia->fecha_fin = $this->fecha_fin;*/
         $membresia->descripcion = $this->descripcion;
         $membresia->save();
-
+        Bitacora::Bitacora('U', 'Membresia', $membresia->id);
         $membresia->servicios()->sync($this->selectedServicios);
-
         session()->flash('status', 'Datos actualizados!');
     }
 

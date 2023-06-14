@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\TpServicio;
 
+use App\Models\Bitacora;
 use App\Models\TipoServicio;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -17,6 +18,7 @@ class TiposComponent extends Component
         $tipoServicio = TipoServicio::find($tservicio_id);
         $tipoServicio->delete();
         $this->deletedTservicioId = $tservicio_id;
+        Bitacora::Bitacora('D', 'Tipo Servicio', $tipoServicio->id);   
       /*  session()->flash('message', 'Registro eliminado exitosamente!');*/
     }
     public function render()

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\NotaCompra;
 
+use App\Models\Bitacora;
 use Illuminate\Support\Facades\Auth;
 use App\Models\NotaCompra;
 use App\Models\Producto;
@@ -69,7 +70,7 @@ class RegistrarNotaCompraComponent extends Component
         $nota_compra->proveedor_id = $this->proveedor_id;
         $nota_compra->user_id = Auth::id();
         $nota_compra->save();
-
+        Bitacora::Bitacora('C', 'Nota Compra', $nota_compra->id);   
         $productosCantidad = [];
         foreach ($this->selectedProductos as $productoId => $selected) {
             if ($selected) {

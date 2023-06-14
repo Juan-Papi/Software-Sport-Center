@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Personal;
 
+use App\Models\Bitacora;
 use App\Models\Personal;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -99,6 +100,7 @@ class EditarPersonalComponent extends Component
     $personal->fecha_fin_contrato = $this->fecha_fin_contrato;
     $personal->estado = $this->estado;
     $personal->save();
+    Bitacora::Bitacora('U', 'Personal', $personal->id);
     session()->flash('status', 'Datos actualizados!');
   }
   

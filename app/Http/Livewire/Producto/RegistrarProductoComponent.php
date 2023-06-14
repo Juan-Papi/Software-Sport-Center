@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Producto;
 
+use App\Models\Bitacora;
 use App\Models\Categoria;
 use App\Models\Marca;
 use App\Models\Producto;
@@ -40,6 +41,7 @@ class RegistrarProductoComponent extends Component
         $producto->marca_id = $this->marca_id;
         $producto->categoria_id = $this->categoria_id;
         $producto->save();
+        Bitacora::Bitacora('C', 'Producto', $producto->id);   
         return redirect(route('producto.index'))->with('status', 'Producto registrado!');
       //  session()->flash('status', 'Producto registrado exitosamente!');
         

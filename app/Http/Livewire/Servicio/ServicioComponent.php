@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Servicio;
 
+use App\Models\Bitacora;
 use Livewire\Component;
 use App\Models\Servicio;
 
@@ -12,6 +13,7 @@ class ServicioComponent extends Component
     {
         $servicio = Servicio::find($servicio_id);
         $servicio->delete();
+        Bitacora::Bitacora('D', 'Servicio', $servicio->id);
         $this->deletedServicioId = $servicio_id;
       /*  session()->flash('message', 'Registro eliminado exitosamente!');*/
     }

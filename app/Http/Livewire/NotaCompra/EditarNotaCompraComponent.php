@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\NotaCompra;
 
+use App\Models\Bitacora;
 use App\Models\NotaCompra;
 use App\Models\Producto;
 use App\Models\Proveedor;
@@ -66,7 +67,7 @@ class EditarNotaCompraComponent extends Component
         $nota_compra->proveedor_id = $this->proveedor_id;
         $nota_compra->user_id = Auth::id();
         $nota_compra->save();
-
+        Bitacora::Bitacora('U', 'Nota Compra', $nota_compra->id);   
         $productosCantidad = [];
         foreach ($this->selectedProductos as $productoId => $selected) {
             if ($selected) {
@@ -74,9 +75,9 @@ class EditarNotaCompraComponent extends Component
                 $productosCantidad[$productoId] = ['cantidad' => $cantidad];
             }
         }
-
-        $nota_compra->productos()->sync($productosCantidad);
+        $nota_compra->productos()->sync($productosCantidad);     
         return redirect(route('nota_compra.index'))->with('status', 'Datos actualizados!');
+    
     }
     //función para retroceder
     public function goBack()

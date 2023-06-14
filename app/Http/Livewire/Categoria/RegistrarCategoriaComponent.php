@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Categoria;
 
+use App\Models\Bitacora;
 use App\Models\Categoria;
 use Livewire\Component;
 
@@ -18,6 +19,7 @@ class RegistrarCategoriaComponent extends Component
         $categoria = new Categoria();
         $categoria->nombre = $this->nombre;
         $categoria->save();
+        Bitacora::Bitacora('U', 'Categoria', $categoria->id);
         return redirect(route('categoria.index'))->with('status', 'Nueva CATEGORIA registrada!');
         //session()->flash('status', 'Nuevo tipo registrado!');
     }
