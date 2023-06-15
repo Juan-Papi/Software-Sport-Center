@@ -8,6 +8,7 @@ use App\Models\Proveedor;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Illuminate\Support\Facades\DB;
 
 class EditarNotaCompraComponent extends Component
 {
@@ -78,6 +79,7 @@ class EditarNotaCompraComponent extends Component
 
         $nota_compra->productos()->sync($productosCantidad);
         return redirect(route('nota_compra.index'))->with('status', 'Datos actualizados!');
+
     }
     //función para retroceder
     public function goBack()
@@ -94,8 +96,26 @@ class EditarNotaCompraComponent extends Component
 
     public function cadaNota()
     {
-        $notasCompra = NotaCompra::paginate(5);
+      $compra = NotaCompra::find($this->nota_compra_id);
+        $this->nota_compra_id = $compra->id;
+        $this->fecha_hora = $compra->fecha_hora;
+        $this->total = $compra->total;
+        $this->proveedor_id = $compra->proveedor_id;
+        $this->user_id = $compra->user_id;
+        
+        $productos = DB::table('nota_compra_producto')
+                        ->select('producto_id')
+                        ->where('nota_compra_id', 'this->$$nota_compra_id')
+                        ->get();
+        $unida_precio= [];
+        foreach($productos as $Producto){
+            $unida_precio = DB::table('productos')
+            ->select('descripcion')
+            ->where('producto_id', 'Producto')
+            ->get();
+        }
+
       $pdf = FacadePdf::loadView('livewire.nota-compra.cadaNota', ['notasCompra' => $notasCompra]);
-      return $pdf->stream();
+      //return $pdf->stream();
     }
 }
