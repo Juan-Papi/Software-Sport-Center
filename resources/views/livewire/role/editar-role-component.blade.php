@@ -9,7 +9,7 @@
                 <div class="card-header pb-0 p-3">
                     <div class="row">
                         <div class="col-md-8 d-flex align-items-center">
-                            <h6 class="mb-3">Datos de la marca</h6>
+                            <h6 class="mb-3">Datos de la Role</h6>
                         </div>
                     </div>
                 </div>
@@ -50,6 +50,18 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="permissions-container">
+                            <label for="permissions">Seleccionar Permisos:</label>
+                            <div class="permissions-grid">
+                                @foreach ($permisos as $permiso)
+                                <div class="permission-item">
+                                    <input type="checkbox" id="{{ $permiso->id }}" name="permissions[]" value="{{ $permiso->id }}"
+                                    wire:model="selectedPermissions">
+                                    <label for="{{ $permiso->id }}">{{ $permiso->name }}</label>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
                         <button type="button" wire:click="goBack()" class="btn bg-gradient-dark">Cancelar</button>
                         <button type="submit" class="btn bg-gradient-dark">Guardar</button>
                     </form>
@@ -57,4 +69,19 @@
             </div>
         </div>
     </div>
+    <style>
+        .permissions-container {
+          margin-bottom: 20px;
+      }
+        .permissions-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-gap: 10px;
+      }         
+        .permission-item {
+          border: 1px solid #ccc;
+          padding: 10px;
+          text-align: center;
+      }                  
+  </style>
 </div>

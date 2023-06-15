@@ -21,7 +21,7 @@ class RegistrarRoleComponent extends Component
         $rol->name = $this->name;
         $rol->save();
         $rol->permissions()->sync($this->selectedPermissions);
-        Bitacora::Bitacora('C', 'Rol', $rol->id);   
+        Bitacora::Bitacora('C', 'Rol', $rol->id); 
         return redirect(route('rol.index'))->with('status', 'Nuevo Rol registrado!');
         //session()->flash('status', 'Nuevo tipo registrado!');
     }

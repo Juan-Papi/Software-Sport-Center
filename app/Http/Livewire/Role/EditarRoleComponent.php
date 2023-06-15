@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Role;
 
 use App\Models\Bitacora;
+use App\Models\Permission;
 use App\Models\Role;
 use Livewire\Component;
 
@@ -10,12 +11,14 @@ class EditarRoleComponent extends Component
 {
     public $rol_id;
     public $name;
-    
+    public $selectedPermissions = [];
+
     public function mount($rol_id)
     {
-        $marca = Role::find($rol_id);
+        $rol = Role::with('permissions')->find($rol_id);
         $this->rol_id = $rol_id;
-        $this->name = $marca->name;
+        $this->name = $rol->name;
+        $this->selectedPermissions = $rol->permissions->pluck('id')->toArray();
     }
 
     public function updateMarca()
@@ -26,8 +29,8 @@ class EditarRoleComponent extends Component
         $rol= Role::find($this->rol_id);
         $rol->name = $this->name;
         $rol->save();
+        $rol->permissions()->sync($this->selectedPermissions);
         Bitacora::Bitacora('U', 'Rol', $rol->id);
-        //session()->flash('status', 'Datos actualizados!');
         return redirect(route('rol.index'))->with('status', 'Datos actualizados!');
     }
 
@@ -40,6 +43,7 @@ class EditarRoleComponent extends Component
 
     public function render()
     {
-        return view('livewire.role.editar-role-component');
+        $permisos = Permission::all();
+        return view('livewire.role.editar-role-component', compact('permisos'));
     }
 }
