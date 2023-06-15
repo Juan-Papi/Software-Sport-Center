@@ -8,6 +8,8 @@
                     </div>
                     {{-- boton añadir --}}
                     <div class=" me-3 my-3 text-end">
+                        <a class="btn bg-gradient-dark mb-0" href="{{ route('nota_compra.pdf') }}"><i
+                            class="material-icons text-sm"></i>&nbsp;&nbsp;PDF</a>
                         <a class="btn bg-gradient-dark mb-0" href="{{ route('nota_compra.registrar') }}"><i
                                 class="material-icons text-sm">add</i>&nbsp;&nbsp;Registrar</a>
                     </div>
@@ -108,6 +110,13 @@
                                                 class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
                                                 data-original-title="Edit user">
                                                 Editar
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a href="{{ route('nota_compra.cadaNota', ['nota_compra_id' => $compra->id]) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                data-original-title="Edit user">
+                                                pdf
                                             </a>
                                         </td>
                                         <td class="align-middle">

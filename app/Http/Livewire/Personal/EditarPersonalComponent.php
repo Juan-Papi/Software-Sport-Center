@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Personal;
 
 use App\Models\Personal;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -108,8 +109,9 @@ class EditarPersonalComponent extends Component
        // Lógica adicional si es necesario
        $this->redirect(route('perosnal.index'));
    }
+
   public function render()
-  {
+   {
     return view('livewire.personal.editar-personal-component');
-  }
+   }
 }

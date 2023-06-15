@@ -7,6 +7,7 @@ use App\Models\Producto;
 use App\Models\Proveedor;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 
 class EditarNotaCompraComponent extends Component
 {
@@ -89,5 +90,12 @@ class EditarNotaCompraComponent extends Component
         $productos = Producto::all();
         $proveedores = Proveedor::all();
         return view('livewire.nota-compra.editar-nota-compra-component',compact('productos','proveedores'));
+    }
+
+    public function cadaNota()
+    {
+        $notasCompra = NotaCompra::paginate(5);
+      $pdf = FacadePdf::loadView('livewire.nota-compra.cadaNota', ['notasCompra' => $notasCompra]);
+      return $pdf->stream();
     }
 }

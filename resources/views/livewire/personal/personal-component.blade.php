@@ -8,6 +8,9 @@
                     </div>
                     {{-- boton añadir --}}
                     <div class=" me-3 my-3 text-end">
+                        <a class="btn bg-gradient-dark mb-0" href="{{ route('personal.pdf') }}"><i
+                            class="material-icons text-sm" target = "_blank" ></i>&nbsp;&nbsp;PDF</a>
+      
                         <a class="btn bg-gradient-dark mb-0" href="{{ route('personal-registro') }}"><i
                                 class="material-icons text-sm">add</i>&nbsp;&nbsp;Registrar</a>
                     </div>

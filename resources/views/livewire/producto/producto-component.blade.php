@@ -9,6 +9,9 @@
                     </div>
                     {{-- boton añadir --}}
                     <div class=" me-3 my-3 text-end">
+                        <a class="btn bg-gradient-dark mb-0" href="{{ route('producto.pdf') }}"><i
+                            class="material-icons text-sm">add</i>&nbsp;&nbsp;PDF</a>
+
                         <a class="btn bg-gradient-dark mb-0" href="{{ route('producto.registrar') }}"><i
                                 class="material-icons text-sm">add</i>&nbsp;&nbsp;Registrar</a>
                     </div>

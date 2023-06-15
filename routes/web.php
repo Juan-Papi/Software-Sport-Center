@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Livewire\Area\AreaComponent;
+use App\Http\Livewire\Area\AreaEdith;
+use App\Http\Livewire\Area\AreaRegistrar;
 use App\Http\Livewire\Auth\ForgotPassword;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
@@ -63,7 +66,8 @@ use App\Http\Livewire\Producto\EditarProductoComponent;
 use App\Http\Livewire\NotaCompra\NotaCompraComponent;
 use App\Http\Livewire\NotaCompra\RegistrarNotaCompraComponent;
 use App\Http\Livewire\NotaCompra\EditarNotaCompraComponent;
-
+use App\Http\Livewire\Personal\Pdf;
+use App\Http\Livewire\Personal\PersonalPdf;
 //aparte
 use GuzzleHttp\Middleware;
 
@@ -103,6 +107,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('rtl', RTL::class)->name('rtl');
     //mis rutas
     Route::get('/personal', PersonalComponent::class)->name('perosnal.index');
+    Route::get('/personal/pdf', [PersonalComponent::class, 'pdf'])->name('personal.pdf');
     Route::get('/personal/registro', RegistrarPersonalComponent::class)->name('personal-registro');
     Route::get('/personal/editar/{personal_id}', EditarPersonalComponent::class)->name('personal-editar');
 
@@ -144,10 +149,18 @@ Route::group(['middleware' => 'auth'], function () {
      //Para los productos
      Route::get('/producto', ProductoComponent::class)->name('producto.index');
      Route::get('/producto/registrar', RegistrarProductoComponent::class)->name('producto.registrar');
+     Route::get('/producto/pdf', [ProductoComponent::class, 'pdf'])->name('producto.pdf');
      Route::get('/producto/editar/{producto_id}', EditarProductoComponent::class)->name('producto.editar');
+     // para area
+
+     Route::get('/area', AreaComponent::class)->name('area.index');
+     Route::get('/area/registrar', AreaRegistrar::class)->name('area.registrar');
+     Route::get('/area/editar/{area_id}', AreaEdith::class)->name('area.editar');
      
      //Para las nota de compras
      Route::get('/nota_compra', NotaCompraComponent::class)->name('nota_compra.index');
+     Route::get('/nota_compra/pdf', [NotaCompraComponent::class, "pdf"])->name('nota_compra.pdf');
+     Route::get('/nota_compra/cadaNota/{nota_compra_id}', [EditarNotaCompraComponent::class, "cadaNota"])->name('nota_compra.cadaNota');
      Route::get('/nota_compra/registrar', RegistrarNotaCompraComponent::class)->name('nota_compra.registrar');
      Route::get('/nota_compra/editar/{nota_compra_id}', EditarNotaCompraComponent::class)->name('nota_compra.editar');
 });

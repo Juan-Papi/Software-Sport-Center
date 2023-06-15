@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Producto;
 
 use App\Models\Producto;
 use Livewire\Component;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Livewire\WithPagination;
 class ProductoComponent extends Component
 {
@@ -13,6 +14,13 @@ class ProductoComponent extends Component
         $membresia = Producto::find($producto_id);
         $membresia->delete();
 
+    }
+    public function pdf()
+    {
+    $productos = Producto::paginate();
+    
+    $pdf = FacadePdf::loadView('livewire.producto.pdf', ['productos' => $productos]);
+    return $pdf->stream();
     }
     public function render()
     {   
