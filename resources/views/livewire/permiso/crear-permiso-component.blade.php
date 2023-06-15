@@ -50,16 +50,13 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="permissions-container">
-                            <label for="permissions">Seleccionar Permisos:</label>
-                            <div class="permissions-grid">
-                                @foreach ($permisos as $permiso)
-                                <div class="permission-item">
-                                    <input type="checkbox" id="{{ $permiso->id }}" name="permissions[]" value="{{ $permiso->id }}"
-                                    wire:model="selectedPermissions">
-                                    <label for="{{ $permiso->id }}">{{ $permiso->name }}</label>
-                                </div>
-                                @endforeach
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">Descripcion</label>
+                                <input wire:model="descripcion" type="text" class="form-control border border-2 p-2">
+                                @error('descripcion')
+                                    <p class='text-danger inputerror'>{{ $message }} </p>
+                                @enderror
                             </div>
                         </div>
                         <button type="button" wire:click="goBack()" class="btn bg-gradient-dark">Cancelar</button>
@@ -69,19 +66,4 @@
             </div>
         </div>
     </div>
-    <style>
-          .permissions-container {
-            margin-bottom: 20px;
-        }
-          .permissions-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 10px;
-        }         
-          .permission-item {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }                  
-    </style>
 </div>

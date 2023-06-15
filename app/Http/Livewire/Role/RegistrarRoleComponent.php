@@ -3,22 +3,24 @@
 namespace App\Http\Livewire\Role;
 
 use App\Models\Bitacora;
+use App\Models\Permission;
 use App\Models\Role;
 use Livewire\Component;
 
 class RegistrarRoleComponent extends Component
 {
     public $name;
+    public $selectedPermissions = [];
 
     public function storeRol()
     {
         $this->validate([
             'name' => 'required',
         ]);
-
         $rol = new Role();
         $rol->name = $this->name;
         $rol->save();
+        $rol->permissions()->sync($this->selectedPermissions);
         Bitacora::Bitacora('C', 'Rol', $rol->id);   
         return redirect(route('rol.index'))->with('status', 'Nuevo Rol registrado!');
         //session()->flash('status', 'Nuevo tipo registrado!');
@@ -32,6 +34,7 @@ class RegistrarRoleComponent extends Component
 
     public function render()
     {
-        return view('livewire.role.registrar-role-component');
+        $permisos = Permission::all();
+        return view('livewire.role.registrar-role-component', compact('permisos'));
     }
 }

@@ -67,6 +67,13 @@ use App\Http\Livewire\Producto\EditarProductoComponent;
 use App\Http\Livewire\NotaCompra\NotaCompraComponent;
 use App\Http\Livewire\NotaCompra\RegistrarNotaCompraComponent;
 use App\Http\Livewire\NotaCompra\EditarNotaCompraComponent;
+
+//Para los Permisos
+use App\Http\Livewire\Permiso\CrearPermisoComponent;
+use App\Http\Livewire\Permiso\EditarPermisoComponent;
+use App\Http\Livewire\Permiso\PermisoComponent;
+
+//Para los Roles
 use App\Http\Livewire\Role\EditarRoleComponent;
 use App\Http\Livewire\Role\RegistrarRoleComponent;
 use App\Http\Livewire\Role\RoleComponent;
@@ -164,5 +171,10 @@ Route::group(['middleware' => 'auth'], function () {
      Route::get('/role', RoleComponent::class)->name('rol.index');
      Route::get('/role/registrar', RegistrarRoleComponent::class)->name('rol.registrar');
      Route::get('/role/editar/{rol_id}', EditarRoleComponent::class)->name('rol.editar');
+
+     //Para los Permiso
+     Route::get('/permiso', PermisoComponent::class)->name('permiso.index');
+     Route::get('/permiso/registrar', CrearPermisoComponent::class)->name('permiso.registrar');
+     Route::get('/permiso/editar/{permiso_id}', EditarPermisoComponent::class)->name('permiso.editar');
 
     });
