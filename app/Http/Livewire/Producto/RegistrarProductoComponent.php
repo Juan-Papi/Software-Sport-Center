@@ -30,16 +30,11 @@ class RegistrarProductoComponent extends Component
         $producto->marca_id = $this->marca_id;
         $producto->categoria_id = $this->categoria_id;
         $producto->save();
-<<<<<<< HEAD
-       // session()->flash('status', 'Nuevo SERVICIO registrado!');
-       return redirect(route('producto.index'))->with('status', 'Nuevo PRODUCTO registrado!');
-=======
         Bitacora::Bitacora('C', 'Producto', $producto->id);   
         return redirect(route('producto.index'))->with('status', 'Producto registrado!');
       //  session()->flash('status', 'Producto registrado exitosamente!');
         
       //  $this->reset(['descripcion', 'stock', 'marca_id', 'categoria_id']);
->>>>>>> ce89abfeb4e9f214c30687adac501f67e0065756
     }
     //función para retroceder
     public function goBack()
