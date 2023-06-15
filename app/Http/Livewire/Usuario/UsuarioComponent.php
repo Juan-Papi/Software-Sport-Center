@@ -21,7 +21,6 @@ class UsuarioComponent extends Component
         Bitacora::Bitacora('D', 'Usuario', $user->id);
         session()->flash('message','Usuario elimidado exitosamente!');
     }
-
     public function render()
     {
         $users = User::orderBy('name', 'ASC')->paginate(5);

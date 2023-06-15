@@ -52,12 +52,11 @@
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
-
                             <div class="mb-3 col-md-6">
                                 <label class="form-label">Categoria</label>
                                 <select name="tipo_id" id="" class="form-control border border-2 p-2"
                                     wire:model="categoria_id">
-                                    <option value="">Selecionar categoria</option>
+                                    <option value="">Seleccionar categoria</option>
                                     @foreach ($categorias as $categoria)
                                         <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
                                     @endforeach

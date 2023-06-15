@@ -10,14 +10,14 @@ class ProveedorComponent extends Component
 {
     public function deleteProveedor($personal_id)
     {
-      $personal = proveedor::find($personal_id);
+      $personal = Proveedor::find($personal_id);
       $personal->delete();
       Bitacora::Bitacora('D', 'Proveedor', $personal->id);
       session()->flash('message','Registro elimidado exitosamente!');
     }
     public function render()
     {
-        $personales = proveedor::orderBy('name', 'ASC')->paginate(5);
+        $personales = Proveedor::orderBy('name', 'ASC')->paginate(5);
         return view('livewire.proveedor.proveedor-component' , ['proveedors' => $personales]);
     }
 }

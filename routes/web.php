@@ -67,7 +67,10 @@ use App\Http\Livewire\Producto\EditarProductoComponent;
 use App\Http\Livewire\NotaCompra\NotaCompraComponent;
 use App\Http\Livewire\NotaCompra\RegistrarNotaCompraComponent;
 use App\Http\Livewire\NotaCompra\EditarNotaCompraComponent;
-
+use App\Http\Livewire\Transaccion\EditarTransaccionComponet;
+//para las transacciones
+use App\Http\Livewire\Transaccion\RegistrarTransaccionComponet;
+use App\Http\Livewire\Transaccion\TransaccionComponent;
 //aparte
 use GuzzleHttp\Middleware;
 
@@ -157,5 +160,14 @@ Route::group(['middleware' => 'auth'], function () {
 
      // Bitacora
      Route::get('/bitacora', Bitacora::class)->name('bitacora.index');
+
+      //! Para las Transacciones
+      Route::get('/transaccion', TransaccionComponent::class)->name('transaccion');
+      Route::get('/transaccion/registrar', RegistrarTransaccionComponet::class)->name('transaccion.registrar');
+      Route::get('/transaccion/editar/{transaccion_id}', EditarTransaccionComponet::class)->name('Transaccion.editar');
     
     });
+    
+
+    
+

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Proveedor extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'email',
@@ -16,6 +17,9 @@ class Proveedor extends Model
         'about',
         'tipo_proveedor'
     ];
+
+    //git add -f "\app\Models\Proveedor.php"
+    // Relacion de uno a muchos entre  proveedor y nota de compra
     public function notasCompra()
     {
         return $this->hasMany(NotaCompra::class);

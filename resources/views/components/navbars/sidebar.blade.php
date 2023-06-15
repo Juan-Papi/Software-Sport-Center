@@ -90,7 +90,7 @@
                 <div class="collapse" id="collapseMenuOtroDesplegable">
                     <ul class="nav">
                         <li class="nav-item"><a class="nav-link" href="{{ route('membresia') }}">Membresia</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Transaccion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('transaccion')}}">Transaccion</a></li>
                     </ul>
                 </div>
             </li>
@@ -156,9 +156,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{Route('categoria.index')}}">Categoría</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Nota de salida</a>
-                        </li>
                     </ul>
                 </div>
             </li>
@@ -174,6 +171,15 @@
                 </a>
                 <div class="collapse" id="collapseMenu4">
                     <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Inventario de productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Inventario- Areas deportivas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Inventario- Areas comunes</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Nota de salida</a>
                         </li>
@@ -218,6 +224,11 @@
                 </div>
             </li> --}}
             {{-- FIN Menu despegable de tablas --}}
+
+
+
+
+
             <li class="nav-item">
                 <a class="nav-link text-white {{ Route::currentRouteName() == 'billing' ? ' active bg-gradient-primary' : '' }}  "
                     href="{{ route('billing') }}">
@@ -285,20 +296,20 @@
         </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-        <div class="mx-3">
+        {{-- <div class="mx-3">
             <a class="btn bg-gradient-primary w-100"
                 href="https://www.creative-tim.com/product/material-dashboard-laravel-livewire" target="_blank">Free
                 Download</a>
-        </div>
+        </div> --}}
         <div class="mx-3">
-            <a class="btn bg-gradient-primary w-100" href="../../documentation/getting-started/installation.html"
+            <a class="btn bg-gradient-primary w-100" href="https://docs.google.com/document/d/1Epk4JCl6CiUjgFjY86q0E0JT-6Ur7aeIGgjGQslv0pc/edit"
                 target="_blank">View documentation</a>
         </div>
         <div class="mx-3">
             <a class="btn bg-gradient-primary w-100"
                 href="https://www.creative-tim.com/product/material-dashboard-pro-laravel-livewire" target="_blank"
                 type="button">Upgrade
-                to pro</a>
+                </a>
         </div>
     </div>
 </aside>

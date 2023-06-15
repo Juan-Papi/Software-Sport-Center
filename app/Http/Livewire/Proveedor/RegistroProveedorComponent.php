@@ -50,7 +50,7 @@ class RegistroProveedorComponent extends Component
             return 
         }
     }*/
-    $proveedor = new proveedor();
+    $proveedor = new Proveedor();
     $proveedor->name = $this->name;
     $proveedor->email = $this->email;
     $proveedor->phone = $this->phone;

@@ -13,21 +13,20 @@ return new class extends Migration
     {
         Schema::create('transaccions', function (Blueprint $table) {
             $table->id();
-            $table->text('descripcion')->nullable();
-            $table->string('estado');
-            $table->dateTime('fecha');
-            $table->decimal('monto', 8, 2);
-            $table->string('tipo');
-            $table->timestamps();
-            
-            $table->date('membresia_inicio')->nullable();
-            $table->date('membresia_vencimiento')->nullable();
+            $table->timestamp('fecha_hora_transaccion');
+            $table->string('tipo_transaccion');
+            $table->string('description')->nullable();
+            $table->decimal('monto', 12, 2);
+            $table->string('metodo_pago');
+            $table->string('estado_transaccion')->default('Pendiente');
 
-            $table->unsignedBigInteger('users_id');
-            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->unsignedBigInteger('membresia_id');
             $table->foreign('membresia_id')->references('id')->on('membresias')->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 
