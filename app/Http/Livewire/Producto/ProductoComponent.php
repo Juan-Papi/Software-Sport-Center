@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Producto;
 
+use App\Models\Bitacora;
 use App\Models\Producto;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -12,8 +13,9 @@ class ProductoComponent extends Component
     public function deleteProducto($producto_id){
         $membresia = Producto::find($producto_id);
         $membresia->delete();
-
+        Bitacora::Bitacora('D', 'Producto', $membresia->id);   
     }
+    
     public function render()
     {   
         $productos = Producto::orderBy('descripcion', 'ASC')->paginate(5);

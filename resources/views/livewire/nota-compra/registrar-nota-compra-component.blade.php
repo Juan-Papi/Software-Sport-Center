@@ -79,7 +79,7 @@
                                 </div>
                             </div>
 
-                            <div>
+                            <div class="mb-3">
                                 <ul class="list-group">
                                     @foreach ($productos as $producto)
                                         <li class="list-group-item"

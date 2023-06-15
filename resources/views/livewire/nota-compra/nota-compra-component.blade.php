@@ -104,7 +104,7 @@
                                         </td>
 
                                         <td class="align-middle">
-                                            <a href="{{ route('nota_compra.editar', ['nota_compra_id' => $compra->id]) }}"
+                                            <a href="{{ route('nota_compra.editar', ['compra_id' => $compra->id]) }}"
                                                 class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
                                                 data-original-title="Edit user">
                                                 Editar

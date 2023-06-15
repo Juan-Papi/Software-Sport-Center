@@ -1,6 +1,11 @@
 <?php
 
 namespace App\Http\Livewire\NotaCompra;
+<<<<<<< HEAD
+=======
+
+use App\Models\Bitacora;
+>>>>>>> ce89abfeb4e9f214c30687adac501f67e0065756
 use Illuminate\Support\Facades\Auth;
 use App\Models\NotaCompra;
 use App\Models\Producto;
@@ -22,6 +27,19 @@ class RegistrarNotaCompraComponent extends Component
 
     public function updated($fields)
     {
+<<<<<<< HEAD
+=======
+        $this->total = 0; // reset the total
+        foreach ($this->selectedProductos as $productoId => $selected) {
+            if ($selected && isset($this->cantidad[$productoId]) && isset($this->precioUnitario[$productoId])) {
+                $cantidad = is_numeric($this->cantidad[$productoId]) ? $this->cantidad[$productoId] : 0;
+                $precioUnitario = is_numeric($this->precioUnitario[$productoId]) ? $this->precioUnitario[$productoId] : 0;
+                $this->total += $cantidad * $precioUnitario;
+            }
+        }
+
+
+>>>>>>> ce89abfeb4e9f214c30687adac501f67e0065756
         $this->validateOnly($fields, [
             'fecha_hora' => 'required',
             'total' => 'required',
@@ -31,9 +49,36 @@ class RegistrarNotaCompraComponent extends Component
 
         ]);
     }
+<<<<<<< HEAD
 
     public function storeCompra()
     {
+=======
+    //En esta función, estás recorriendo todos los productos y comprobando si el producto no está seleccionado. Si no está seleccionado, eliminas su cantidad y su precio unitario.(para usar en storeCompra)
+    public function cleanUnselectedProducts()
+    {
+        foreach ($this->selectedProductos as $productoId => $selected) {
+            if (!$selected) {
+                unset($this->cantidad[$productoId]);
+                unset($this->precioUnitario[$productoId]);
+            }
+        }
+    }
+
+    public function storeCompra()
+    {
+        // Limpiar productos no seleccionados
+        $this->cleanUnselectedProducts();
+
+        // Comprobando que al menos un producto está seleccionado
+        $productosSeleccionados = array_filter($this->selectedProductos);
+        if (count($productosSeleccionados) == 0) {
+            session()->flash('message', 'Por favor, seleccione al menos un producto.');
+            return;
+        }
+
+        // Reglas de validación
+>>>>>>> ce89abfeb4e9f214c30687adac501f67e0065756
         $this->validate([
             'fecha_hora' => 'required',
             'total' => 'required',
@@ -49,10 +94,10 @@ class RegistrarNotaCompraComponent extends Component
         $nota_compra->proveedor_id = $this->proveedor_id;
         $nota_compra->user_id = Auth::id();
         $nota_compra->save();
-
+        Bitacora::Bitacora('C', 'Nota Compra', $nota_compra->id);   
         $productosCantidad = [];
         foreach ($this->selectedProductos as $productoId => $selected) {
-            if ($selected) {
+            if ($selected && isset($this->cantidad[$productoId]) && isset($this->precioUnitario[$productoId])) {
                 $cantidad = $this->cantidad[$productoId];
                 $productosCantidad[$productoId] = ['cantidad' => $cantidad];
             }
@@ -63,6 +108,7 @@ class RegistrarNotaCompraComponent extends Component
 
         //  session()->flash('status', 'Nueva MEMBRESIA registrada!');
     }
+
 
     //función para retroceder
     public function goBack()

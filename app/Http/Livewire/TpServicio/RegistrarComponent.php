@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\TpServicio;
 
+use App\Models\Bitacora;
 use Livewire\Component;
 use App\Models\TipoServicio;
 
@@ -18,6 +19,7 @@ class RegistrarComponent extends Component
         $tservicio = new TipoServicio();
         $tservicio->nombre = $this->nombre;
         $tservicio->save();
+        Bitacora::Bitacora('C', 'Tipo Servicio', $tservicio->id);   
         session()->flash('status', 'Nuevo tipo registrado!');
     }
     //función para retroceder

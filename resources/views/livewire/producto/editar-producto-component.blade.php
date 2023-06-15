@@ -9,7 +9,11 @@
                 <div class="card-header pb-0 p-3">
                     <div class="row">
                         <div class="col-md-8 d-flex align-items-center">
+<<<<<<< HEAD
                             <h6 class="mb-3">Datos del producto</h6>
+=======
+                            <h6 class="mb-3">Actualizacion del producto</h6>
+>>>>>>> ce89abfeb4e9f214c30687adac501f67e0065756
                         </div>
                     </div>
                 </div>
@@ -43,7 +47,11 @@
                                 <label class="form-label">Marca</label>
                                 <select name="tipo_id" id="" class="form-control border border-2 p-2"
                                     wire:model="marca_id">
+<<<<<<< HEAD
                                     <option value="">Seleccionar Marca</option>
+=======
+                                    <option value="">Selecione la marca</option>
+>>>>>>> ce89abfeb4e9f214c30687adac501f67e0065756
                                     @foreach ($marcas as $marca)
                                         <option value="{{ $marca->id }}">{{ $marca->nombre }}</option>
                                     @endforeach
@@ -52,11 +60,19 @@
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> ce89abfeb4e9f214c30687adac501f67e0065756
                             <div class="mb-3 col-md-6">
                                 <label class="form-label">Categoria</label>
                                 <select name="tipo_id" id="" class="form-control border border-2 p-2"
                                     wire:model="categoria_id">
+<<<<<<< HEAD
                                     <option value="">Seleccionar Categoria</option>
+=======
+                                    <option value="">Selecionar categoria</option>
+>>>>>>> ce89abfeb4e9f214c30687adac501f67e0065756
                                     @foreach ($categorias as $categoria)
                                         <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
                                     @endforeach
@@ -65,6 +81,7 @@
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
+<<<<<<< HEAD
                             <div class="mb-3 col-md-6">
 
                                 <label class="form-label">Precio</label>
@@ -74,12 +91,28 @@
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
+=======
+
+                            <div class="mb-3 col-md-12">
+                                <label class="form-label form-label-lg">Stock</label>
+                                <input wire:model="stock" name="stock" type="number" class="form-control form-control-lg border border-2 p-2">
+                                @error('stock')
+                                    <p class='text-danger inputerror'>{{ $message }} </p>
+                                @enderror
+                            </div>
+                            
+>>>>>>> ce89abfeb4e9f214c30687adac501f67e0065756
 
                             <div class="mb-3 col-md-12">
 
                                 <label for="floatingTextarea2">Descripcion</label>
+<<<<<<< HEAD
                                 <textarea wire:model="descripcion" class="form-control border border-2 p-2" placeholder=" Say something about yourself"
                                     id="floatingTextarea2" rows="4" cols="50"></textarea>
+=======
+                                <textarea wire:model="descripcion" class="form-control border border-2 p-2"
+                                    placeholder="Escriba aqui todo acerca del producto .... " id="floatingTextarea2" rows="4" cols="50"></textarea>
+>>>>>>> ce89abfeb4e9f214c30687adac501f67e0065756
                                 @error('descripcion')
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror

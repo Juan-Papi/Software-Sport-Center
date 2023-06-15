@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Proveedor;
 
 use App\Models\Proveedor;
+use App\Models\Bitacora;
+//use App\Models\proveedor;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -63,6 +65,7 @@ class EditarProveedorComponent extends Component
     $proveedor->location = $this->location;
     $proveedor->tipo_proveedor = $this->tipo_proveedor;
     $proveedor->save();
+    Bitacora::Bitacora('U', 'Proveedor', $proveedor->id);
     return redirect(route('proveedor.index'))->with('status', 'Datos actualizados!');
   }
 

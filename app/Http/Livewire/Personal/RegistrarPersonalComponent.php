@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Personal;
 
+use App\Models\Bitacora;
 use App\Models\Personal;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -85,6 +86,7 @@ class RegistrarPersonalComponent extends Component
     $personal->fecha_fin_contrato = $this->fecha_fin_contrato;
     $personal->estado = $this->estado;
     $personal->save();
+    Bitacora::Bitacora('C', 'Personal', $personal->id);
     session()->flash('status', 'Nuevo PERSONAL registrado!');
   }
 

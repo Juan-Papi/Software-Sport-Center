@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Auth;
 
+use App\Models\Bitacora;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
@@ -40,8 +41,9 @@ class Login extends Component
             ]);
         }
 
+        $user = auth()->user();
+        Bitacora::Bitacora('I', 'Inicio Sesion', $user->id);
         session()->regenerate();
-
         return redirect('/dashboard');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Membresia;
 
+use App\Models\Bitacora;
 use Livewire\Component;
 use App\Models\Membresia;
 use App\Models\Servicio;
@@ -49,7 +50,7 @@ class RegistrarMembresiaComponent extends Component
         $membresia->fecha_fin = $this->fecha_fin;*/
         $membresia->descripcion = $this->descripcion;
         $membresia->save();
-
+        Bitacora::Bitacora('C', 'Membresia', $membresia->id);   
             // Asignar las categorías seleccionadas al producto
             // $membresia->categories()->sync($request->input('categories'));
 
