@@ -23,7 +23,7 @@ class UsuarioComponent extends Component
     }
     public function render()
     {
-        $users = User::orderBy('name', 'ASC')->paginate(5);
+        $users = User::with('role')->orderBy('name', 'ASC')->paginate(15);
         return view('livewire.usuario.usuario-component',['users' => $users]);
     }
 }

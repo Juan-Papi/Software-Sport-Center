@@ -26,6 +26,7 @@ class User extends Authenticatable
     'location',
     'phone',
     'about',
+    'role_id', // Agrega el campo role_id al array fillable
   ];
 
   /**
@@ -66,5 +67,9 @@ class User extends Authenticatable
    //relacion de uno a muchos
    public function notasCompra(){
     return $this->hasMany(NotaCompra::class);
+  }
+  public function role()
+  {
+      return $this->belongsTo(Role::class);
   }
 }
