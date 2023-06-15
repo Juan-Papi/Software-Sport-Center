@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Transaccion;
 
+use App\Models\Bitacora;
 use App\Models\Transaccion;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -17,6 +18,7 @@ class TransaccionComponent extends Component
     {
         $transaccion = Transaccion::find($transaccion_id);
         $transaccion->delete();
+        Bitacora::Bitacora('D', 'Transaccion', $transaccion->id);   
         session()->flash('message','Transaccion elimidado exitosamente!');
     }
 

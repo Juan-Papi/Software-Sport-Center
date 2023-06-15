@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Transaccion;
 
+use App\Models\Bitacora;
 use App\Models\Membresia;
 use App\Models\Transaccion;
 use App\Models\User;
@@ -75,6 +76,7 @@ class EditarTransaccionComponet extends Component
 
 
     $transaccion->save();
+    Bitacora::Bitacora('U', 'Transaccion', $transaccion->id); 
     //return redirect(route('transaccion'))->with('message', 'Nueva Transaccion registrada!');
      session()->flash('message', ' Registro Actualizado exitoso!');
   }

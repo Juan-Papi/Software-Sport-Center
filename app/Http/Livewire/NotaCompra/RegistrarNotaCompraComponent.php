@@ -12,15 +12,14 @@ use Livewire\Component;
 class RegistrarNotaCompraComponent extends Component
 {
 
-
     public $fecha_hora;
-    public $total;
+    public $total = 0;
     public $proveedor_id;
     public $user_id;
 
     public $selectedProductos = [];
     public $cantidad = [];
-
+    public $precioUnitario = [];
 
     public function updated($fields)
     {
@@ -40,7 +39,7 @@ class RegistrarNotaCompraComponent extends Component
             'proveedor_id' => 'required',
             'selectedProductos' => 'required',
             'cantidad' => 'required',
-
+            'precioUnitario' => 'required',
         ]);
     }
     //En esta función, estás recorriendo todos los productos y comprobando si el producto no está seleccionado. Si no está seleccionado, eliminas su cantidad y su precio unitario.(para usar en storeCompra)
@@ -73,7 +72,7 @@ class RegistrarNotaCompraComponent extends Component
             'proveedor_id' => 'required',
             'selectedProductos' => 'required',
             'cantidad' => 'required',
-
+            'precioUnitario' => 'required',
         ]);
 
         $nota_compra = new NotaCompra();
@@ -82,19 +81,18 @@ class RegistrarNotaCompraComponent extends Component
         $nota_compra->proveedor_id = $this->proveedor_id;
         $nota_compra->user_id = Auth::id();
         $nota_compra->save();
-        Bitacora::Bitacora('C', 'Nota Compra', $nota_compra->id);   
+        Bitacora::Bitacora('C', 'Nota Compra', $nota_compra->id);
         $productosCantidad = [];
         foreach ($this->selectedProductos as $productoId => $selected) {
             if ($selected && isset($this->cantidad[$productoId]) && isset($this->precioUnitario[$productoId])) {
                 $cantidad = $this->cantidad[$productoId];
-                $productosCantidad[$productoId] = ['cantidad' => $cantidad];
+                $precioUnitario = $this->precioUnitario[$productoId]; // Obtenemos el precio unitario
+                $productosCantidad[$productoId] = ['cantidad' => $cantidad, 'precio_unitario' => $precioUnitario]; // Agregamos el precio unitario
             }
         }
 
         $nota_compra->productos()->sync($productosCantidad);
         return redirect(route('nota_compra.index'))->with('status', 'Nueva COMPRA registrada!');
-
-        //  session()->flash('status', 'Nueva MEMBRESIA registrada!');
     }
 
 

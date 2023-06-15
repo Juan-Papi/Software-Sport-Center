@@ -86,9 +86,9 @@
 
                                             <a href="#" class="text-secondary font-weight-bold text-xs"
                                                 data-toggle="tooltip" data-original-title="Eliminar"
-                                                data-bs-toggle="modal" data-bs-target="#modal-notification">
+                                                data-bs-toggle="modal" data-bs-target="#modal-notification-{{ $transaccion->id }}">
                                                 Eliminar
-                                                <div class="modal fade" id="modal-notification" tabindex="-1"
+                                                <div class="modal fade" id="modal-notification-{{ $transaccion->id }}" tabindex="-1"
                                                     role="dialog" aria-labelledby="modal-notification"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-danger modal-dialog-centered modal-"
