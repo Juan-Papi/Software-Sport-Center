@@ -105,11 +105,18 @@
 
                                         <td class="align-middle">
                                             <a href="{{ route('nota_compra.editar', ['compra_id' => $compra->id]) }}"
-                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                class="text-secondary font-weight-bold text-xs me-3" data-toggle="tooltip"
                                                 data-original-title="Edit user">
                                                 Editar
                                             </a>
+                                        
+                                            <a href="{{ route('nota_compra.pdf', ['nota_compra_id' => $compra->id]) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                data-original-title="Generar PDF">
+                                                Generar PDF
+                                            </a>
                                         </td>
+                                        
                                         <td class="align-middle">
 
                                             <a href="#" class="text-secondary font-weight-bold text-xs"

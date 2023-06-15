@@ -68,6 +68,8 @@ use App\Http\Livewire\NotaCompra\NotaCompraComponent;
 use App\Http\Livewire\NotaCompra\RegistrarNotaCompraComponent;
 use App\Http\Livewire\NotaCompra\EditarNotaCompraComponent;
 use App\Http\Livewire\Transaccion\EditarTransaccionComponet;
+
+use App\Http\Controllers\NotaCompraController;
 //para las transacciones
 use App\Http\Livewire\Transaccion\RegistrarTransaccionComponet;
 use App\Http\Livewire\Transaccion\TransaccionComponent;
@@ -148,26 +150,26 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/categoria/registrar', RegistrarCategoriaComponent::class)->name('categoria.registrar');
     Route::get('/categoria/editar/{categoria_id}', EditarCategoriaComponent::class)->name('categoria.editar');
 
-     //Para los productos
-     Route::get('/producto', ProductoComponent::class)->name('producto.index');
-     Route::get('/producto/registrar', RegistrarProductoComponent::class)->name('producto.registrar');
-     Route::get('/producto/editar/{producto_id}', EditarProductoComponent::class)->name('producto.editar');
-     
-     //Para las nota de compras
-     Route::get('/nota_compra', NotaCompraComponent::class)->name('nota_compra.index');
-     Route::get('/nota_compra/registrar', RegistrarNotaCompraComponent::class)->name('nota_compra.registrar');
-     Route::get('/nota_compra/editar/{compra_id}', EditarNotaCompraComponent::class)->name('nota_compra.editar');
+    //Para los productos
+    Route::get('/producto', ProductoComponent::class)->name('producto.index');
+    Route::get('/producto/registrar', RegistrarProductoComponent::class)->name('producto.registrar');
+    Route::get('/producto/editar/{producto_id}', EditarProductoComponent::class)->name('producto.editar');
 
-     // Bitacora
-     Route::get('/bitacora', Bitacora::class)->name('bitacora.index');
+    //Para las nota de compras
+    Route::get('/nota_compra', NotaCompraComponent::class)->name('nota_compra.index');
+    Route::get('/nota_compra/registrar', RegistrarNotaCompraComponent::class)->name('nota_compra.registrar');
+    Route::get('/nota_compra/editar/{compra_id}', EditarNotaCompraComponent::class)->name('nota_compra.editar');    
 
-      //! Para las Transacciones
-      Route::get('/transaccion', TransaccionComponent::class)->name('transaccion');
-      Route::get('/transaccion/registrar', RegistrarTransaccionComponet::class)->name('transaccion.registrar');
-      Route::get('/transaccion/editar/{transaccion_id}', EditarTransaccionComponet::class)->name('Transaccion.editar');
-    
-    });
-    
+   // Route::get('/nota_compra/{nota_compra_id}/pdf', 'NotaCompraController@generarPDF')->name('nota_compra.pdf');
 
-    
+    Route::get('nota_compra/{nota_compra_id}/pdf', [NotaCompraController::class, 'generarPDF'])->name('nota_compra.pdf');
 
+
+    // Bitacora
+    Route::get('/bitacora', Bitacora::class)->name('bitacora.index');
+
+    //! Para las Transacciones
+    Route::get('/transaccion', TransaccionComponent::class)->name('transaccion');
+    Route::get('/transaccion/registrar', RegistrarTransaccionComponet::class)->name('transaccion.registrar');
+    Route::get('/transaccion/editar/{transaccion_id}', EditarTransaccionComponet::class)->name('Transaccion.editar');
+});
