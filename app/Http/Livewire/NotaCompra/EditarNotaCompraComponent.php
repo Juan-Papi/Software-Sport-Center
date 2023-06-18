@@ -94,28 +94,5 @@ class EditarNotaCompraComponent extends Component
         return view('livewire.nota-compra.editar-nota-compra-component',compact('productos','proveedores'));
     }
 
-    public function cadaNota()
-    {
-      $compra = NotaCompra::find($this->nota_compra_id);
-        $this->nota_compra_id = $compra->id;
-        $this->fecha_hora = $compra->fecha_hora;
-        $this->total = $compra->total;
-        $this->proveedor_id = $compra->proveedor_id;
-        $this->user_id = $compra->user_id;
-        
-        $productos = DB::table('nota_compra_producto')
-                        ->select('producto_id')
-                        ->where('nota_compra_id', 'this->$$nota_compra_id')
-                        ->get();
-        $unida_precio= [];
-        foreach($productos as $Producto){
-            $unida_precio = DB::table('productos')
-            ->select('descripcion')
-            ->where('producto_id', 'Producto')
-            ->get();
-        }
-
-      $pdf = FacadePdf::loadView('livewire.nota-compra.cadaNota', ['notasCompra' => $notasCompra]);
-      //return $pdf->stream();
-    }
+    
 }

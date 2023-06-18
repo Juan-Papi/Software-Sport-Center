@@ -17,6 +17,7 @@
     table {
     width: 80%; /* Ajusta el ancho de la tabla según tus necesidades */
     margin: 0 auto; /* Centra la tabla horizontalmente */
+    font-size: 20px;
     }
     th, td {
     text-align: center; /* Centra los elementos en cada celda */

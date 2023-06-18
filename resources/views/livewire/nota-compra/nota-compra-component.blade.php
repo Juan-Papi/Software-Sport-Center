@@ -112,13 +112,7 @@
                                                 Editar
                                             </a>
                                         </td>
-                                        <td class="align-middle">
-                                            <a href="{{ route('nota_compra.cadaNota', ['nota_compra_id' => $compra->id]) }}"
-                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                                data-original-title="Edit user">
-                                                pdf
-                                            </a>
-                                        </td>
+                                        
                                         <td class="align-middle">
 
                                             <a href="#" class="text-secondary font-weight-bold text-xs"

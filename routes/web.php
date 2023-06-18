@@ -160,7 +160,6 @@ Route::group(['middleware' => 'auth'], function () {
      //Para las nota de compras
      Route::get('/nota_compra', NotaCompraComponent::class)->name('nota_compra.index');
      Route::get('/nota_compra/pdf', [NotaCompraComponent::class, "pdf"])->name('nota_compra.pdf');
-     Route::get('/nota_compra/cadaNota/{nota_compra_id}', [EditarNotaCompraComponent::class, "cadaNota"])->name('nota_compra.cadaNota');
      Route::get('/nota_compra/registrar', RegistrarNotaCompraComponent::class)->name('nota_compra.registrar');
      Route::get('/nota_compra/editar/{nota_compra_id}', EditarNotaCompraComponent::class)->name('nota_compra.editar');
 });
