@@ -57,7 +57,7 @@
                                 <div class="permission-item">
                                     <input type="checkbox" id="{{ $permiso->id }}" name="permissions[]" value="{{ $permiso->id }}"
                                     wire:model="selectedPermissions">
-                                    <label for="{{ $permiso->id }}">{{ $permiso->name }}</label>
+                                    <label for="{{ $permiso->id }}">{{ $permiso->description }}</label>
                                 </div>
                                 @endforeach
                             </div>
