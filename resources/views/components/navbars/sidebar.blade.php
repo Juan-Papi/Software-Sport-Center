@@ -57,6 +57,7 @@
             </li>
 
             {{-- Menu despegable de tablas --}}
+            @can('usuario')
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }}"
                     href="#" id="navbarDropdown" role="button" data-bs-toggle="collapse"
@@ -69,7 +70,8 @@
                 <div class="collapse" id="collapseMenu">
                     <ul class="nav">
                         <li class="nav-item"><a class="nav-link" href="{{ route('perosnal.index') }}">Personal</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('usuario') }}">Usuario</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('usuario') }}">Usuario</a></li>
+
                         <li class="nav-item"><a class="nav-link" href="{{ route('rol.index') }}">Roles</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('permiso.index') }}">Permisos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('bitacora.index') }}">Bitacora</a></li>
@@ -77,8 +79,9 @@
                     </ul>
                 </div>
             </li>
-
+            @endcan
             {{-- Modulo de membresias y transacciones --}}
+            @can('membresia')
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white {{ Route::currentRouteName() == 'otroDesplegable' ? ' active bg-gradient-primary' : '' }}"
                     href="#" id="otroDesplegableDropdown" role="button" data-bs-toggle="collapse"
@@ -96,8 +99,9 @@
                     </ul>
                 </div>
             </li>
-
+            @endcan
             {{-- Modulo de  servicios --}}
+            @can('servicio.index')
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white {{ Route::currentRouteName() == 'otros' ? ' active bg-gradient-primary' : '' }}"
                     href="#" id="otrosDropdown" role="button" data-bs-toggle="collapse"
@@ -117,7 +121,9 @@
                     </ul>
                 </div>
             </li>
+            @endcan
             {{-- Administracion de compras --}}
+            @can('nota_compra.index')
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }}"
                     href="#" id="navbarDropdown2" role="button" data-bs-toggle="collapse"
@@ -136,8 +142,9 @@
                     </ul>
                 </div>
             </li>
-
+            @endcan
             {{-- Administracion de productos --}}
+            @can('producto.index')
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white {{ Route::currentRouteName() == 'productos' ? ' active bg-gradient-primary' : '' }}"
                     href="#" id="navbarDropdown3" role="button" data-bs-toggle="collapse"
@@ -161,6 +168,7 @@
                     </ul>
                 </div>
             </li>
+            @endcan
             {{-- Administracion de inventarios --}}
             {{-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white {{ Route::currentRouteName() == 'inventarios' ? ' active bg-gradient-primary' : '' }}"

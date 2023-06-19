@@ -70,9 +70,11 @@ use App\Http\Livewire\NotaCompra\EditarNotaCompraComponent;
 use App\Http\Livewire\Transaccion\EditarTransaccionComponet;
 
 use App\Http\Controllers\NotaCompraController;
+
 //para las transacciones
 use App\Http\Livewire\Transaccion\RegistrarTransaccionComponet;
 use App\Http\Livewire\Transaccion\TransaccionComponent;
+
 //Para los Permisos
 use App\Http\Livewire\Permiso\CrearPermisoComponent;
 use App\Http\Livewire\Permiso\EditarPermisoComponent;
@@ -82,6 +84,7 @@ use App\Http\Livewire\Permiso\PermisoComponent;
 use App\Http\Livewire\Role\EditarRoleComponent;
 use App\Http\Livewire\Role\RegistrarRoleComponent;
 use App\Http\Livewire\Role\RoleComponent;
+
 //aparte
 use GuzzleHttp\Middleware;
 
@@ -120,77 +123,76 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('static-sign-up', StaticSignUp::class)->name('static-sign-up');
     Route::get('rtl', RTL::class)->name('rtl');
     //mis rutas
-    Route::get('/personal', PersonalComponent::class)->name('perosnal.index');
-    Route::get('/personal/registro', RegistrarPersonalComponent::class)->name('personal-registro');
-    Route::get('/personal/editar/{personal_id}', EditarPersonalComponent::class)->name('personal-editar');
+    Route::get('/personal', PersonalComponent::class)->middleware('can:perosnal.index')->name('perosnal.index');
+    Route::get('/personal/registro', RegistrarPersonalComponent::class)->middleware('can:personal-registro')->name('personal-registro');
+    Route::get('/personal/editar/{personal_id}', EditarPersonalComponent::class)->middleware('can:personal-editar')->name('personal-editar');
 
     //Tipos de servicios para la membresia
-    Route::get('/tservicio', TiposComponent::class)->name('tservicio.index');
-    Route::get('/tservicio/registrar', RegistrarComponent::class)->name('tservicio.registrar');
-    Route::get('/tservicio/editar/{tservicio_id}', EditarComponent::class)->name('tservicio.editar');
+    Route::get('/tservicio', TiposComponent::class)->middleware('can:tservicio.index')->name('tservicio.index');
+    Route::get('/tservicio/registrar', RegistrarComponent::class)->middleware('can:tservicio.registrar')->name('tservicio.registrar');
+    Route::get('/tservicio/editar/{tservicio_id}', EditarComponent::class)->middleware('can:tservicio.editar')->name('tservicio.editar');
 
     //Servicios para la membresia
-    Route::get('/servicio', ServicioComponent::class)->name('servicio.index');
-    Route::get('/servicio/registrar', RegistrarServicioComponent::class)->name('servicio.registrar');
-    Route::get('/servicio/editar/{servicio_id}', EditarServicioComponent::class)->name('servicio.editar');
+    Route::get('/servicio', ServicioComponent::class)->middleware('can:servicio.index')->name('servicio.index');
+    Route::get('/servicio/registrar', RegistrarServicioComponent::class)->middleware('can:servicio.registrar')->name('servicio.registrar');
+    Route::get('/servicio/editar/{servicio_id}', EditarServicioComponent::class)->middleware('can:servicio.editar')->name('servicio.editar');
 
     //Membresias
-    Route::get('/membresias', MembresiaComponent::class)->name('membresia');
-    Route::get('/membresia/registrar', RegistrarMembresiaComponent::class)->name('membresia-registrar');
-    Route::get('/membresia/editar/{membresia_id}', EditarMembresiaComponent::class)->name('membresia-editar');
+    Route::get('/membresias', MembresiaComponent::class)->middleware('can:membresia')->name('membresia');
+    Route::get('/membresia/registrar', RegistrarMembresiaComponent::class)->middleware('can:membresia-registrar')->name('membresia-registrar');
+    Route::get('/membresia/editar/{membresia_id}', EditarMembresiaComponent::class)->middleware('can:membresia-editar')->name('membresia-editar');
 
     //! routers usuario con errores CORREGIR!!!!
-    Route::get('/usuario', UsuarioComponent::class)->name('usuario');
-    Route::get('/usuario/registrar', RegistrarUsuarioComponent::class)->name('usuario-registro');
-    Route::get('/usuario/editar/{user_id}', EditarUsuarioComponent::class)->name('usuario-editar');
+    Route::get('/usuario', UsuarioComponent::class)->middleware('can:usuario')->name('usuario');
+    Route::get('/usuario/registrar', RegistrarUsuarioComponent::class)->middleware('can:usuario-registro')->name('usuario-registro');
+    Route::get('/usuario/editar/{user_id}', EditarUsuarioComponent::class)->middleware('can:usuario-editar')->name('usuario-editar');
 
     // proovedor
-    Route::get('/proveedor', ProveedorComponent::class)->name('proveedor.index');
-    Route::get('/proveedor/registro', RegistroProveedorComponent::class)->name('proveedor-registro');
-    Route::get('/proveedor/editar/{proveedor_id}', EditarProveedorComponent::class)->name('proveedor-editar');
+    Route::get('/proveedor', ProveedorComponent::class)->middleware('can:proveedor.index')->name('proveedor.index');
+    Route::get('/proveedor/registro', RegistroProveedorComponent::class)->middleware('can:proveedor-registro')->name('proveedor-registro');
+    Route::get('/proveedor/editar/{proveedor_id}', EditarProveedorComponent::class)->middleware('can:proveedor-editar')->name('proveedor-editar');
 
     //Para las marcas
-    Route::get('/marca', MarcaComponent::class)->name('marca.index');
-    Route::get('/marca/registrar', RegistrarMarcaComponent::class)->name('marca.registrar');
-    Route::get('/marca/editar/{marca_id}', EditarMarcaComponent::class)->name('marca.editar');
+    Route::get('/marca', MarcaComponent::class)->middleware('can:marca.index')->name('marca.index');
+    Route::get('/marca/registrar', RegistrarMarcaComponent::class)->middleware('can:marca.registrar')->name('marca.registrar');
+    Route::get('/marca/editar/{marca_id}', EditarMarcaComponent::class)->middleware('can:marca.editar')->name('marca.editar');
 
     //Para las categorias
-    Route::get('/categoria', CategoriaComponent::class)->name('categoria.index');
-    Route::get('/categoria/registrar', RegistrarCategoriaComponent::class)->name('categoria.registrar');
-    Route::get('/categoria/editar/{categoria_id}', EditarCategoriaComponent::class)->name('categoria.editar');
+    Route::get('/categoria', CategoriaComponent::class)->middleware('can:categoria.index')->name('categoria.index');
+    Route::get('/categoria/registrar', RegistrarCategoriaComponent::class)->middleware('can:categoria.registrar')->name('categoria.registrar');
+    Route::get('/categoria/editar/{categoria_id}', EditarCategoriaComponent::class)->middleware('can:categoria.editar')->name('categoria.editar');
 
     //Para los productos
-    Route::get('/producto', ProductoComponent::class)->name('producto.index');
-    Route::get('/producto/registrar', RegistrarProductoComponent::class)->name('producto.registrar');
-    Route::get('/producto/editar/{producto_id}', EditarProductoComponent::class)->name('producto.editar');
+    Route::get('/producto', ProductoComponent::class)->middleware('can:producto.index')->name('producto.index');
+    Route::get('/producto/registrar', RegistrarProductoComponent::class)->middleware('can:producto.registrar')->name('producto.registrar');
+    Route::get('/producto/editar/{producto_id}', EditarProductoComponent::class)->middleware('can:producto.editar')->name('producto.editar');
 
     //Para las nota de compras
-    Route::get('/nota_compra', NotaCompraComponent::class)->name('nota_compra.index');
-    Route::get('/nota_compra/registrar', RegistrarNotaCompraComponent::class)->name('nota_compra.registrar');
-    Route::get('/nota_compra/editar/{compra_id}', EditarNotaCompraComponent::class)->name('nota_compra.editar');    
+    Route::get('/nota_compra', NotaCompraComponent::class)->middleware('can:nota_compra.index')->name('nota_compra.index');
+    Route::get('/nota_compra/registrar', RegistrarNotaCompraComponent::class)->middleware('can:nota_compra.registrar')->name('nota_compra.registrar');
+    Route::get('/nota_compra/editar/{compra_id}', EditarNotaCompraComponent::class)->middleware('can:nota_compra.editar')->name('nota_compra.editar');    
 
    // Route::get('/nota_compra/{nota_compra_id}/pdf', 'NotaCompraController@generarPDF')->name('nota_compra.pdf');
-
-    Route::get('nota_compra/{nota_compra_id}/pdf', [NotaCompraController::class, 'generarPDF'])->name('nota_compra.pdf');
-
+    Route::get('nota_compra/{nota_compra_id}/pdf', [NotaCompraController::class, 'generarPDF'])->middleware('can:nota_compra.pdf')->name('nota_compra.pdf');
 
     // Bitacora
-    Route::get('/bitacora', Bitacora::class)->name('bitacora.index');
-
-    //! Para las Transacciones
-    Route::get('/transaccion', TransaccionComponent::class)->name('transaccion');
-    Route::get('/transaccion/registrar', RegistrarTransaccionComponet::class)->name('transaccion.registrar');
-    Route::get('/transaccion/editar/{transaccion_id}', EditarTransaccionComponet::class)->name('Transaccion.editar');
+    Route::get('/bitacora', Bitacora::class)->middleware('can:bitacora.index')->name('bitacora.index');
 
     //Para los Roles
-    Route::get('/role', RoleComponent::class)->name('rol.index');
-    Route::get('/role/registrar', RegistrarRoleComponent::class)->name('rol.registrar');
-    Route::get('/role/editar/{rol_id}', EditarRoleComponent::class)->name('rol.editar');
+    Route::get('/role', RoleComponent::class)->middleware('can:rol.index')->name('rol.index');
+    Route::get('/role/registrar', RegistrarRoleComponent::class)->middleware('can:rol.registrar')->name('rol.registrar');
+    Route::get('/role/editar/{rol_id}', EditarRoleComponent::class)->middleware('can:rol.editar')->name('rol.editar');
 
     //Para los Permiso
-    Route::get('/permiso', PermisoComponent::class)->name('permiso.index');
-    Route::get('/permiso/registrar', CrearPermisoComponent::class)->name('permiso.registrar');
-    Route::get('/permiso/editar/{permiso_id}', EditarPermisoComponent::class)->name('permiso.editar');
+    Route::get('/permiso', PermisoComponent::class)->middleware('can:permiso.index')->name('permiso.index');
+    Route::get('/permiso/registrar', CrearPermisoComponent::class)->middleware('can:permiso.index')->name('permiso.registrar');
+    Route::get('/permiso/editar/{permiso_id}', EditarPermisoComponent::class)->middleware('can:permiso.index')->name('permiso.editar');
+
+    //! Para las Transacciones
+    Route::get('/transaccion', TransaccionComponent::class)->middleware('can:transaccion')->name('transaccion');
+    Route::get('/transaccion/registrar', RegistrarTransaccionComponet::class)->middleware('can:transaccion.registrar')->name('transaccion.registrar');
+    Route::get('/transaccion/editar/{transaccion_id}', EditarTransaccionComponet::class)->middleware('can:Transaccion.editar')->name('Transaccion.editar');
+
 });
     
     

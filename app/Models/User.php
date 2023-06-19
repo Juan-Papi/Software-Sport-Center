@@ -9,11 +9,13 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Personal;
 use App\Models\Transaccion;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
   use HasApiTokens, HasFactory, Notifiable;
-
+  use HasRoles;
+  
   /**
    * The attributes that are mass assignable.
    *
@@ -67,9 +69,5 @@ class User extends Authenticatable
    //relacion de uno a muchos
    public function notasCompra(){
     return $this->hasMany(NotaCompra::class);
-  }
-  public function role()
-  {
-      return $this->belongsTo(Role::class);
   }
 }

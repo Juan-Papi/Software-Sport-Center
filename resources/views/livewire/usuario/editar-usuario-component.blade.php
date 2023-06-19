@@ -42,18 +42,14 @@
                   @endif
                     <form wire:submit.prevent='updateUsuario'>
                         <div class="row">
-
                             <div class="mb-3 col-md-6">
-
                                 <label class="form-label">Nombre</label>
                                 <input wire:model="name" type="text" class="form-control border border-2 p-2">
                                 @error('name')
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
-
                             <div class="mb-3 col-md-6">
-
                                 <label class="form-label">Correo Eleccion</label>
                                 <input wire:model="email" name="email" type="text"
                                     class="form-control border border-2 p-2">
@@ -61,27 +57,21 @@
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
-
                             <div class="mb-3 col-md-6">
-
                                 <label class="form-label">Contraseña</label>
                                 <input wire:model="password" type="password" class="form-control border border-2 p-2">
                                 @error('password')
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
-
                             <div class="mb-3 col-md-6">
-
                                 <label class="form-label">Ciudad</label>
                                 <input wire:model="location" type="location" class="form-control border border-2 p-2">
                                 @error('location')
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
-
                             <div class="mb-3 col-md-6">
-
                               <label class="form-label">Personal</label>
                               <select class="form-control border border-2 p-2" name="personal_id" id=""
                                   wire:model="personal_id">
@@ -94,9 +84,21 @@
                                   <p class='text-danger inputerror'>{{ $message }} </p>
                               @enderror
                           </div>
-
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">Rol</label>
+                                <select class="form-control border border-2 p-2" name="role_id" id="" wire:model="role_id">
+                                    @foreach ($roles as $rol)
+                                        <option value="{{ $rol->id }}" 
+                                            @if ($rol->id == $user->roles->first()->id) 
+                                                selected 
+                                            @endif>{{ $rol->name }}</option>
+                                    @endforeach
+                                </select>                                
+                                @error('name')
+                                    <p class='text-danger inputerror'>{{ $message }}</p>
+                                @enderror
+                            </div>   
                             <div class="mb-3 col-md-12">
-
                                 <label for="floatingTextarea2">Acerca:</label>
                                 <textarea wire:model="about" class="form-control border border-2 p-2" placeholder=" Say something about yourself"
                                     id="floatingTextarea2" rows="4" cols="50"></textarea>

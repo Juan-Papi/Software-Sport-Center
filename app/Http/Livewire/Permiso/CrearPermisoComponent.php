@@ -5,20 +5,21 @@ namespace App\Http\Livewire\Permiso;
 use App\Models\Bitacora;
 use App\Models\Permission;
 use Livewire\Component;
+use Spatie\Permission\Models\Permission as ModelsPermission;
 
 class CrearPermisoComponent extends Component
 {
-    public $name, $descripcion;
+    public $name, $description;
 
     public function storeRol()
     {
         $this->validate([
             'name' => 'required',
-            'descripcion' => 'required',
+            'description' => 'required',
         ]);
-        $permiso = new Permission();
+        $permiso = new ModelsPermission();
         $permiso->name = $this->name;
-        $permiso->descripcion = $this->descripcion;
+        $permiso->description = $this->description;
         $permiso->save();
         Bitacora::Bitacora('C', 'Permiso', $permiso->id);   
         return redirect(route('permiso.index'))->with('status', 'Nuevo Permiso registrado!');

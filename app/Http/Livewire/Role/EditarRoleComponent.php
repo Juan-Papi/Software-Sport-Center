@@ -6,6 +6,8 @@ use App\Models\Bitacora;
 use App\Models\Permission;
 use App\Models\Role;
 use Livewire\Component;
+use Spatie\Permission\Models\Permission as ModelsPermission;
+use Spatie\Permission\Models\Role as ModelsRole;
 
 class EditarRoleComponent extends Component
 {
@@ -15,7 +17,7 @@ class EditarRoleComponent extends Component
 
     public function mount($rol_id)
     {
-        $rol = Role::with('permissions')->find($rol_id);
+        $rol = ModelsRole::with('permissions')->find($rol_id);
         $this->rol_id = $rol_id;
         $this->name = $rol->name;
         $this->selectedPermissions = $rol->permissions->pluck('id')->toArray();
@@ -26,7 +28,7 @@ class EditarRoleComponent extends Component
         $this->validate([
             'name' => 'required',
         ]);
-        $rol= Role::find($this->rol_id);
+        $rol= ModelsRole::find($this->rol_id);
         $rol->name = $this->name;
         $rol->save();
         $rol->permissions()->sync($this->selectedPermissions);
@@ -43,7 +45,7 @@ class EditarRoleComponent extends Component
 
     public function render()
     {
-        $permisos = Permission::all();
+        $permisos = ModelsPermission::all();
         return view('livewire.role.editar-role-component', compact('permisos'));
     }
 }

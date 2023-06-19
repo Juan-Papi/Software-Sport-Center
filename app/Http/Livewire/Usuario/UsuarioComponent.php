@@ -6,6 +6,7 @@ use App\Models\Bitacora;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Spatie\Permission\Models\Role;
 
 class UsuarioComponent extends Component
 {
@@ -21,9 +22,11 @@ class UsuarioComponent extends Component
         Bitacora::Bitacora('D', 'Usuario', $user->id);
         session()->flash('message','Usuario elimidado exitosamente!');
     }
+    
     public function render()
     {
-        $users = User::with('role')->orderBy('name', 'ASC')->paginate(15);
-        return view('livewire.usuario.usuario-component',['users' => $users]);
+        $users = User::orderBy('name', 'ASC')->paginate(15);
+        $roles = Role::all();
+        return view('livewire.usuario.usuario-component',['users' => $users, 'roles' => $roles]);
     }
 }

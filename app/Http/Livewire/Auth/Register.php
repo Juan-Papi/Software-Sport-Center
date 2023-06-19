@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Auth;
 
+use App\Models\Bitacora;
 use App\Models\User;
 use Livewire\Component;
 
@@ -29,7 +30,8 @@ class Register extends Component
     $user = User::create($attributes);
 
     auth()->login($user);
-
+    $user->assignRole('Usuario');
+    Bitacora::Bitacora('C', 'Usuario', $user->id);
     return redirect('/dashboard');
   }
 

@@ -7,6 +7,7 @@ use App\Models\Personal;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Spatie\Permission\Models\Role;
 
 class EditarUsuarioComponent extends Component
 {
@@ -20,6 +21,8 @@ class EditarUsuarioComponent extends Component
     public $about;
     public $password;
     public $personal_id;
+    public $userRoles , $user;
+    public $role_id;
 
     public function mount($user_id)
     {
@@ -32,6 +35,8 @@ class EditarUsuarioComponent extends Component
         $this->about = $user->about;
         $this->password = $user->password;
         $this->personal_id = $user->personal_id;
+        $this->user = $user;
+        $this->userRoles  = $user->getRoleNames();
     }
   
     public function updated($fields)
@@ -51,7 +56,6 @@ class EditarUsuarioComponent extends Component
         'email' => 'required',
         'password' => 'required'
       ]);
-  
       $user = User::find($this->user_id);
       $user->name = $this->name;
       $user->email = $this->email;
@@ -60,8 +64,14 @@ class EditarUsuarioComponent extends Component
       $user->about = $this->about;
       $user->password = $this->password;
       $user->personal_id = $this->personal_id;
-      Bitacora::Bitacora('U', 'Usuario', $user->id);
+      if ($this->role_id != null) {
+          if ($user->roles->first()) {
+              $user->removeRole($user->roles->first()->name);
+          }
+          $user->syncRoles($this->role_id);
+      }
       $user->save();
+      Bitacora::Bitacora('U', 'Usuario', $user->id);
       session()->flash('message', 'Actualizacion exitosa!');
     }
   
@@ -72,12 +82,10 @@ class EditarUsuarioComponent extends Component
       $this->redirect(route('usuario'));
     }
   
-
-
-
     public function render()
     {
         $personales=Personal::orderBy('nombre','ASC')->get();
-        return view('livewire.usuario.editar-usuario-component',['personales'=>$personales]);
+        $roles = Role::all();
+        return view('livewire.usuario.editar-usuario-component',['personales'=>$personales, 'roles'=>$roles]);
     }
 }

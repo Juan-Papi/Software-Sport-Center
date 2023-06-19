@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Permiso;
 use App\Models\Bitacora;
 use App\Models\Permission;
 use Livewire\Component;
+use Spatie\Permission\Models\Permission as ModelsPermission;
 
 class PermisoComponent extends Component
 {
@@ -12,7 +13,7 @@ class PermisoComponent extends Component
 
     public function deletePermiso($permiso_id)
     {
-        $permiso = Permission::find($permiso_id);
+        $permiso = ModelsPermission::find($permiso_id);
         $permiso->delete();
         Bitacora::Bitacora('D', 'Permiso', $permiso->id);
         session()->flash('message','Permiso elimidado exitosamente!');
@@ -20,7 +21,7 @@ class PermisoComponent extends Component
 
     public function render()
     {
-        $permisos = Permission::orderBy('id', 'ASC')->paginate(31);
+        $permisos = ModelsPermission::orderBy('id', 'ASC')->paginate(32);
         return view('livewire.permiso.permiso-component', compact('permisos'));
     }
 }

@@ -5,18 +5,19 @@ namespace App\Http\Livewire\Permiso;
 use App\Models\Bitacora;
 use App\Models\Permission;
 use Livewire\Component;
+use Spatie\Permission\Models\Permission as ModelsPermission;
 
 class EditarPermisoComponent extends Component
 {
     public $permiso_id;
-    public $name, $descripcion;
+    public $name, $description;
     
     public function mount($permiso_id)
     {
-        $permiso = Permission::find($permiso_id);
+        $permiso = ModelsPermission::find($permiso_id);
         $this->permiso_id = $permiso_id;
         $this->name = $permiso->name;
-        $this->descripcion = $permiso->descripcion;
+        $this->description = $permiso->description;
     }
 
     public function updatePermiso()
@@ -24,9 +25,9 @@ class EditarPermisoComponent extends Component
         $this->validate([
             'name' => 'required',
         ]);
-        $permiso= Permission::find($this->permiso_id);
+        $permiso= ModelsPermission::find($this->permiso_id);
         $permiso->name = $this->name;
-        $permiso->descripcion = $this->descripcion;
+        $permiso->description = $this->description;
         $permiso->save();
         Bitacora::Bitacora('U', 'Permiso', $permiso->id);
         //session()->flash('status', 'Datos actualizados!');

@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Spatie\Permission\Models\Role as ModelsRole;
 
 class RegistrarUsuarioComponent extends Component
 {
@@ -27,7 +28,8 @@ class RegistrarUsuarioComponent extends Component
     $this->validateOnly($fields, [
       'name' => 'required',
       'email' => 'required',
-      'password' => 'required'
+      'password' => 'required',
+      'role_id' => 'required'
     ]);
   }
 
@@ -37,9 +39,9 @@ class RegistrarUsuarioComponent extends Component
     $this->validate([
       'name' => 'required',
       'email' => 'required',
-      'password' => 'required'
+      'password' => 'required',
+      'role_id' => 'required'
     ]);
-
     $user = new User();
     $user->name = $this->name;
     $user->email = $this->email;
@@ -48,10 +50,8 @@ class RegistrarUsuarioComponent extends Component
     $user->about = $this->about;
     $user->password = $this->password;
     $user->personal_id = $this->personal_id;
-    if (!empty($this->role_id)) {
-        $user->role_id = $this->role_id;
-    }
     $user->save();
+    $user->assignRole($this->role_id);
     Bitacora::Bitacora('C', 'Usuario', $user->id);
     session()->flash('message', 'Nuevo Usuario registrado!');
   }
@@ -66,7 +66,7 @@ class RegistrarUsuarioComponent extends Component
   public function render()
   {
     $personales=Personal::orderBy('nombre','ASC')->get();
-    $roles=Role::orderBy('name','ASC')->get();
+    $roles=ModelsRole::orderBy('name','ASC')->get();
     return view('livewire.usuario.registrar-usuario-component',['personales'=>$personales, 'roles'=>$roles]);
   }
 }

@@ -15,46 +15,39 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(PermissionSeeder::class);
         $this->call(RolesSeeder::class);
-
+        
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@material.com',
             'password' => ('secret'),
-            'role_id' => 1,
-        ]);
+        ])->syncRoles('Administrador');
 
-
+        User::factory()->create([
+            'name' => 'Eduardo Rojas Calderon',
+            'email' => 'calderoneduardo123sc@gmail.com',
+            'password' => bcrypt('87654321'),
+        ])->syncRoles('Personal');    
 
         $usuarios = [
-            //nro 1
-            [
-                'name' => 'Eduardo Rojas Calderon',
-                'email' => 'calderoneduardo123sc@gmail.com',
-                'password' => bcrypt('87654321'),
-                'role_id' => 1,
-            ],
+            
             //nro 2
             [
                 'name' => 'Jhoel Ibarra',
                 'email' => 'jhoel123@gmail.com',
                 'password' => bcrypt('password123'),
-                'role_id' => 1,
             ],
             //nro 3
             [
                 'name' => 'Jhonn Montoya',
                 'email' => 'montoya@gmail.com',
                 'password' => bcrypt('password123'),
-                'role_id' => 1,
             ],
             //nro 4
             [
                 'name' => 'Carlos Ibañez',
                 'email' => 'carlos123@gmail.com',
                 'password' => bcrypt('password123'),
-                'role_id' => 1,
             ],
             //nro 5
             [
@@ -67,20 +60,18 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Alvaro Machuca',
                 'email' => 'alvaro123@gmail.com',
                 'password' => bcrypt('password123'),
-                'role_id' => 1,
             ],
            //nro 7
             [
                 'name' => 'Juan Pablo Rodriguez',
                 'email' => 'pablojuan123sc@hotmail.com',
                 'password' => bcrypt('password123'),
-                'role_id' => 1,
             ],
            
         ];
     
         foreach ($usuarios as $usuario) {
-            User::create($usuario);
+            User::create($usuario)->syncRoles('Administrador');
         }
         $this->call(PersonalSeeder::class);
         $this->call(MembresiaSeeder::class);

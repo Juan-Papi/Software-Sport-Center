@@ -53,8 +53,8 @@
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <label class="form-label">Descripcion</label>
-                                <input wire:model="descripcion" type="text" class="form-control border border-2 p-2">
-                                @error('descripcion')
+                                <input wire:model="description" type="text" class="form-control border border-2 p-2">
+                                @error('description')
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>

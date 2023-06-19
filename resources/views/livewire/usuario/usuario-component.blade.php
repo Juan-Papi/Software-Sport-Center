@@ -54,7 +54,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-secondary text-xs font-weight-bold">{{ $user->role->name }}</p>
+                                            <p class="text-secondary text-xs font-weight-bold">{{ $user->getRoleNames()->implode(' ') }}</p>
                                         </td>
                                         <td>
                                             <p class="text-secondary text-xs font-weight-bold">{{ $user->email }}</p>

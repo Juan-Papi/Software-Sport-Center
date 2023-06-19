@@ -4,8 +4,9 @@ namespace App\Http\Livewire\Role;
 
 use App\Models\Bitacora;
 use App\Models\Permission;
-use App\Models\Role;
 use Livewire\Component;
+use Spatie\Permission\Models\Permission as ModelsPermission;
+use Spatie\Permission\Models\Role as ModelsRole;
 
 class RegistrarRoleComponent extends Component
 {
@@ -17,7 +18,7 @@ class RegistrarRoleComponent extends Component
         $this->validate([
             'name' => 'required',
         ]);
-        $rol = new Role();
+        $rol = new ModelsRole();
         $rol->name = $this->name;
         $rol->save();
         $rol->permissions()->sync($this->selectedPermissions);
@@ -34,7 +35,7 @@ class RegistrarRoleComponent extends Component
 
     public function render()
     {
-        $permisos = Permission::all();
+        $permisos = ModelsPermission::all();
         return view('livewire.role.registrar-role-component', compact('permisos'));
     }
 }
