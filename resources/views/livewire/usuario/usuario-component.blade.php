@@ -21,6 +21,9 @@
                                         Usuario</th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Rol</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Correo</th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
@@ -49,6 +52,9 @@
                                                     </p>
                                                 </div>
                                             </div>
+                                        </td>
+                                        <td>
+                                            <p class="text-secondary text-xs font-weight-bold">{{ $user->role->name }}</p>
                                         </td>
                                         <td>
                                             <p class="text-secondary text-xs font-weight-bold">{{ $user->email }}</p>

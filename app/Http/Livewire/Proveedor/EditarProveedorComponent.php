@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Proveedor;
 
-use App\Models\Proveedor;
 use App\Models\Bitacora;
+use App\Models\Proveedor;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;

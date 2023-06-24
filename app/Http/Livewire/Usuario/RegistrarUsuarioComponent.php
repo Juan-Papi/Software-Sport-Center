@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Usuario;
 
 use App\Models\Bitacora;
 use App\Models\Personal;
+use App\Models\Role;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -19,6 +20,7 @@ class RegistrarUsuarioComponent extends Component
   public $about;
   public $password;
   public $personal_id;
+  public $role_id;
 
   public function updated($fields)
   {
@@ -46,8 +48,11 @@ class RegistrarUsuarioComponent extends Component
     $user->about = $this->about;
     $user->password = $this->password;
     $user->personal_id = $this->personal_id;
-    Bitacora::Bitacora('C', 'Usuario', $user->id);
+    if (!empty($this->role_id)) {
+        $user->role_id = $this->role_id;
+    }
     $user->save();
+    Bitacora::Bitacora('C', 'Usuario', $user->id);
     session()->flash('message', 'Nuevo Usuario registrado!');
   }
 
@@ -60,7 +65,8 @@ class RegistrarUsuarioComponent extends Component
 
   public function render()
   {
-    $personales = Personal::orderBy('nombre', 'ASC')->get();
-    return view('livewire.usuario.registrar-usuario-component', ['personales' => $personales]);
+    $personales=Personal::orderBy('nombre','ASC')->get();
+    $roles=Role::orderBy('name','ASC')->get();
+    return view('livewire.usuario.registrar-usuario-component',['personales'=>$personales, 'roles'=>$roles]);
   }
 }
