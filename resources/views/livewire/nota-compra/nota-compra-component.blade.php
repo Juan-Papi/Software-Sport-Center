@@ -1,4 +1,50 @@
 <div>
+    <div>
+        <form wire:submit.prevent="render">
+            <div class="row">
+                <div class="col">
+                    <label for="desde">Desde</label>
+                    <input wire:model="desde" type="date" class="form-control" id="desde">
+                </div>
+                <div class="col">
+                    <label for="hasta">Hasta</label>
+                    <input wire:model="hasta" type="date" class="form-control" id="hasta">
+                </div>
+                <div class="col">
+                    <label for="proveedor">Proveedor</label>
+                    <select wire:model="proveedor" id="proveedor" class="form-control">
+                        <option value="">Todos</option>
+                        @foreach ($proveedores as $prov)
+                            <option value="{{ $prov->id }}">{{ $prov->name }}</option>
+                        @endforeach
+
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="usuario">Usuario</label>
+                    <select wire:model="usuario" id="usuario" class="form-control">
+                        <option value="">Todos</option>
+
+                        @foreach ($usuarios as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endforeach
+
+                    </select>
+                </div>
+                <div class="col d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+                <div class="col d-flex align-items-end">
+                    <button type="button" wire:click="resetFilters" class="btn btn-secondary">Reiniciar
+                        filtros</button>
+                </div>
+                <div class="col d-flex align-items-end">
+                    <a href="{{ route('nota_compra.reporte', ['desde' => $desde, 'hasta' => $hasta, 'proveedor' => $proveedor, 'usuario' => $usuario]) }}"
+                        target="_blank" class="btn btn-success">Generar Reporte</a>
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="row">
         <div class="col-12">
             <div class="card my-4">
@@ -12,44 +58,49 @@
                                 class="material-icons text-sm">add</i>&nbsp;&nbsp;Registrar</a>
                     </div>
                     @if (session('status'))
-                    <div class="row">
-                        <div class="alert alert-success alert-dismissible text-white" role="alert">
-                            <span class="text-sm">{{ Session::get('status') }}</span>
-                            <button type="button" class="btn-close text-lg py-3 opacity-10"
-                                data-bs-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                        <div class="row">
+                            <div class="alert alert-success alert-dismissible text-white" role="alert">
+                                <span class="text-sm">{{ Session::get('status') }}</span>
+                                <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
+                                    aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                @endif
+                    @endif
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-dark">
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-dark">
                                         ID_COMPRA
                                     </th>
-                                    
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-dark">
+
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-dark">
                                         Fecha y hora
                                     </th>
-                                    
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-dark">
+
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-dark">
                                         Monto total
                                     </th>
-                                    
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-dark">
+
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-dark">
                                         Usuario
                                     </th>
-                                    
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-dark">
+
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-dark">
                                         Proveedor
                                     </th>
-                                    
+
                                     <th class="text-secondary opacity-7"></th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -105,18 +156,18 @@
 
                                         <td class="align-middle">
                                             <a href="{{ route('nota_compra.editar', ['compra_id' => $compra->id]) }}"
-                                                class="text-secondary font-weight-bold text-xs me-3" data-toggle="tooltip"
-                                                data-original-title="Edit user">
+                                                class="text-secondary font-weight-bold text-xs me-3"
+                                                data-toggle="tooltip" data-original-title="Edit user">
                                                 Editar
                                             </a>
-                                        
+
                                             <a href="{{ route('nota_compra.pdf', ['nota_compra_id' => $compra->id]) }}"
                                                 class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
                                                 data-original-title="Generar PDF">
                                                 Generar PDF
                                             </a>
                                         </td>
-                                        
+
                                         <td class="align-middle">
 
                                             <a href="#" class="text-secondary font-weight-bold text-xs"
@@ -125,8 +176,8 @@
                                                 data-bs-target="#modal-notification-{{ $compra->id }}">
                                                 Eliminar
                                                 <div class="modal fade" id="modal-notification-{{ $compra->id }}"
-                                                    tabindex="-1" role="dialog" aria-labelledby="modal-notification"
-                                                    aria-hidden="true">
+                                                    tabindex="-1" role="dialog"
+                                                    aria-labelledby="modal-notification" aria-hidden="true">
                                                     <div class="modal-dialog modal-danger modal-dialog-centered modal-"
                                                         role="document">
                                                         <div class="modal-content">

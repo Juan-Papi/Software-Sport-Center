@@ -174,6 +174,7 @@ Route::group(['middleware' => 'auth'], function () {
 
    // Route::get('/nota_compra/{nota_compra_id}/pdf', 'NotaCompraController@generarPDF')->name('nota_compra.pdf');
     Route::get('nota_compra/{nota_compra_id}/pdf', [NotaCompraController::class, 'generarPDF'])->middleware('can:nota_compra.pdf')->name('nota_compra.pdf');
+    Route::get('nota_compra/reporte', [NotaCompraController::class, 'reporte'])->name('nota_compra.reporte');
 
     // Bitacora
     Route::get('/bitacora', Bitacora::class)->middleware('can:bitacora.index')->name('bitacora.index');
