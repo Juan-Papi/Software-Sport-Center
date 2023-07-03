@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\Personal\PersonalController;
-use App\Http\Controllers\Api\Usuario\UserController;
+use App\Http\Controllers\Api\ApiAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
-Route::apiResource('register' , UserController::class)->names('api.register');
-Route::apiResource('personal' , PersonalController::class)->names('api.personal');
+Route::post('login', [ApiAuthController::class, 'login']);
+
+Route::post('register', [ApiAuthController::class, 'register']);
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    
+    Route::get('logout', [ApiAuthController::class, 'logout']);
+});
