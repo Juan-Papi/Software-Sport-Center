@@ -169,75 +169,35 @@
                 </div>
             </li>
             @endcan
-            {{-- Administracion de inventarios --}}
-            {{-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white {{ Route::currentRouteName() == 'inventarios' ? ' active bg-gradient-primary' : '' }}"
-                    href="#" id="navbarDropdown4" role="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseMenu4" aria-expanded="false" aria-controls="collapseMenu4">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">inventory_2</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Inventario</span>
-                </a>
-                <div class="collapse" id="collapseMenu4">
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Inventario de productos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Inventario- Areas deportivas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Inventario- Areas comunes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Nota de salida</a>
-                        </li>
-                    </ul>
-                </div>
-            </li> --}}
-            {{-- Para las areas deportivas --}}
-            <li class="nav-item">
-                <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                    href="#">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">sports_soccer</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Areas Deportivas</span>
-                </a>
-            </li>
-            {{-- Para las areas comunes --}}
-            <li class="nav-item">
-                <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                    href="#">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">meeting_room</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Areas Comunes</span>
-                </a>
-            </li>
-
-            {{-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }}" href="#" id="navbarDropdown" role="button" data-bs-toggle="collapse" data-bs-target="#collapseMenu" aria-expanded="false" aria-controls="collapseMenu">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">table_view</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Tables</span>
-                </a>
-            
-                <div class="collapse {{ Route::currentRouteName() == 'tables' ? ' show' : '' }}" id="collapseMenu">
-                    <ul class="nav">
-                        <li class="nav-item {{ Route::currentRouteName() == 'tables.action' ? ' active' : '' }}"><a class="nav-link" href="{{ route('tables.action') }}"><i class="material-icons">check</i> Action</a></li>
-                        <li class="nav-item {{ Route::currentRouteName() == 'tables.another_action' ? ' active' : '' }}"><a class="nav-link" href="{{ route('tables.another_action') }}"><i class="material-icons">edit</i> Another action</a></li>
-                        <li class="nav-item {{ Route::currentRouteName() == 'tables.something_else' ? ' active' : '' }}"><a class="nav-link" href="{{ route('tables.something_else') }}"><i class="material-icons">info</i> Something else here</a></li>
-                    </ul>
-                </div>
-            </li> --}}
-            {{-- FIN Menu despegable de tablas --}}
-
-
-
-
+                 {{-- Administracion de Reserva --}}
+                 @can('producto.index')
+                 <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle text-white {{ Route::currentRouteName() == 'reserva' ? ' active bg-gradient-primary' : '' }}"
+                         href="#" id="navbarDropdown3" role="button" data-bs-toggle="collapse"
+                         data-bs-target="#collapseMenu11" aria-expanded="false" aria-controls="collapseMenu11">
+                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                             <i class="material-icons opacity-10">sports_soccer</i>
+                         </div>
+                         <span class="nav-link-text ms-1">Reserva</span>
+                     </a>
+                     <div class="collapse" id="collapseMenu11">
+                         <ul class="nav">
+                             <li class="nav-item">
+                                 <a class="nav-link" href="{{route('reserva.index')}}">Reserva</a>
+                             </li>
+                             <li class="nav-item">
+                                 <a class="nav-link" href="{{Route('area.index')}}">Areas Sport</a>
+                             </li>
+                             <li class="nav-item">
+                                 <a class="nav-link" href="{{Route('estado.index')}}">Estados</a>
+                             </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="{{Route('cliente.index')}}">Cliente</a>
+                            </li>
+                         </ul>
+                     </div>
+                 </li>
+                 @endcan
 
             <li class="nav-item">
                 <a class="nav-link text-white {{ Route::currentRouteName() == 'billing' ? ' active bg-gradient-primary' : '' }}  "

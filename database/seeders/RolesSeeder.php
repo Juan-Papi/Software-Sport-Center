@@ -74,5 +74,23 @@ class RolesSeeder extends Seeder
         Permission::create(['name' => 'transaccion', 'description' => 'Ver Transaccion'])->syncRoles($admin, $personal, $user);
         Permission::create(['name' => 'transaccion.registrar', 'description' => 'Crear Transaccion'])->syncRoles($admin, $personal, $user);
         Permission::create(['name' => 'Transaccion.editar', 'description' => 'Editar Transaccion'])->syncRoles($admin, $personal, $user);
+
+        Permission::create(['name' => 'cliente.index', 'description' => 'Ver cliente'])->syncRoles($admin, $personal, $user);
+        Permission::create(['name' => 'cliente.registrar', 'description' => 'Crear cliente'])->syncRoles($admin, $personal, $user);
+        Permission::create(['name' => 'cliente.editar', 'description' => 'Editar Transaccion'])->syncRoles($admin, $personal, $user);
+
+        Permission::create(['name' => 'estado.index', 'description' => 'Ver estado'])->syncRoles($admin, $personal, $user);
+        Permission::create(['name' => 'estado.registrar', 'description' => 'Crear estado'])->syncRoles($admin, $personal, $user);
+        Permission::create(['name' => 'estado.editar', 'description' => 'Editar estado'])->syncRoles($admin, $personal, $user);
+
+        Permission::create(['name' => 'area.index', 'description' => 'Ver area'])->syncRoles($admin, $personal, $user);
+        Permission::create(['name' => 'area.registrar', 'description' => 'Crear area'])->syncRoles($admin, $personal, $user);
+        Permission::create(['name' => 'area.editar', 'description' => 'Editar area'])->syncRoles($admin, $personal, $user);
+
+        Permission::create(['name' => 'reserva.index', 'description' => 'Ver reserva'])->syncRoles($admin, $personal, $user);
+        Permission::create(['name' => 'reserva.registrar', 'description' => 'Crear reserva'])->syncRoles($admin, $personal, $user);
+        Permission::create(['name' => 'reserva.editar', 'description' => 'Editar reserva'])->syncRoles($admin, $personal, $user);
+
+
     }
 }

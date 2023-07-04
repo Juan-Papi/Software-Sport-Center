@@ -33,7 +33,9 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+           // 'root' => storage_path('app'), // ruta de imagens  lo q esta habilitado desabilidando
+           'root' => public_path('assets/img'),
+           'throw' => false,
         ],
 
         'public' => [

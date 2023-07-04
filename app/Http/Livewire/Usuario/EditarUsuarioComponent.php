@@ -89,3 +89,4 @@ class EditarUsuarioComponent extends Component
         return view('livewire.usuario.editar-usuario-component',['personales'=>$personales, 'roles'=>$roles]);
     }
 }
+                                                                  

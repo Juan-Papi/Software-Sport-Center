@@ -79,12 +79,27 @@ use App\Http\Livewire\Transaccion\TransaccionComponent;
 use App\Http\Livewire\Permiso\CrearPermisoComponent;
 use App\Http\Livewire\Permiso\EditarPermisoComponent;
 use App\Http\Livewire\Permiso\PermisoComponent;
-
 //Para los Roles
 use App\Http\Livewire\Role\EditarRoleComponent;
 use App\Http\Livewire\Role\RegistrarRoleComponent;
 use App\Http\Livewire\Role\RoleComponent;
+//Para los clientes
+use App\Http\Livewire\Cliente\ClienteComponent;
+use App\Http\Livewire\Cliente\EditarClienteComponent;
+use App\Http\Livewire\Cliente\RegistrarClienteComponent;
+//Para los estasd de la reserva
+use App\Http\Livewire\EstadoReserava\EstadoReservaComponent;
+use App\Http\Livewire\EstadoReserava\RegistrarEstadoReservaComponent;
+use App\Http\Livewire\EstadoReserava\EditarEstadoReservaComponent;
+//Para el area de reserava
+use App\Http\Livewire\Area\AreaComponent;
+use App\Http\Livewire\Area\EditarAreaComponent;
+use App\Http\Livewire\Area\RegistrarAreaComponent;
 
+//para la reserva
+use App\Http\Livewire\Reserava\EditarReservaComponent;
+use App\Http\Livewire\Reserava\RegistrarReservaComponent;
+use App\Http\Livewire\Reserava\ReservaComponent;
 //aparte
 use GuzzleHttp\Middleware;
 
@@ -174,7 +189,6 @@ Route::group(['middleware' => 'auth'], function () {
 
    // Route::get('/nota_compra/{nota_compra_id}/pdf', 'NotaCompraController@generarPDF')->name('nota_compra.pdf');
     Route::get('nota_compra/{nota_compra_id}/pdf', [NotaCompraController::class, 'generarPDF'])->middleware('can:nota_compra.pdf')->name('nota_compra.pdf');
-    Route::get('nota_compra/reporte', [NotaCompraController::class, 'reporte'])->name('nota_compra.reporte');
 
     // Bitacora
     Route::get('/bitacora', Bitacora::class)->middleware('can:bitacora.index')->name('bitacora.index');
@@ -194,9 +208,25 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/transaccion/registrar', RegistrarTransaccionComponet::class)->middleware('can:transaccion.registrar')->name('transaccion.registrar');
     Route::get('/transaccion/editar/{transaccion_id}', EditarTransaccionComponet::class)->middleware('can:Transaccion.editar')->name('Transaccion.editar');
 
-});
-    
-    
-     
+    // TODO: Ruata de tabla cliente
+    Route::get('/cliente',ClienteComponent::class)->middleware('can:cliente.index')->name('cliente.index');
+    Route::get('/cliente/registrar', RegistrarClienteComponent::class)->middleware('can:cliente.registrar')->name('cliente.registrar');
+    Route::get('/cliente/editar/{cliente_id}', EditarClienteComponent::class)->middleware('can:cliente.editar')->name('cliente.editar');
 
-    
+    // TODO: Ruata de tabla Estaod de  Reserava
+    Route::get('/estado',EstadoReservaComponent::class)->middleware('can:estado.index')->name('estado.index');
+    Route::get('/estado/registrar', RegistrarEstadoReservaComponent::class)->middleware('can:estado.registrar')->name('estado.registrar');
+    Route::get('/estado/editar/{estado_id}', EditarEstadoReservaComponent::class)->middleware('can:estado.editar')->name('estado.editar');
+
+    // TODO: Ruata de tabla Area de reserava
+    Route::get('/area',AreaComponent::class)->middleware('can:area.index')->name('area.index');
+    Route::get('/area/registrar', RegistrarAreaComponent::class)->middleware('can:area.registrar')->name('area.registrar');
+    Route::get('/area/editar/{area_id}', EditarAreaComponent::class)->middleware('can:area.editar')->name('area.editar');
+
+    // TODO: Ruata de tabla Reserava
+    Route::get('/reserva',ReservaComponent::class)->middleware('can:reserva.index')->name('reserva.index');
+    Route::get('/reserva/registrar', RegistrarReservaComponent::class)->middleware('can:reserva.registrar')->name('reserva.registrar');
+    Route::get('/reserva/editar/{area_id}', EditarReservaComponent::class)->middleware('can:reserva.editar')->name('reserva.editar');
+
+});
+
